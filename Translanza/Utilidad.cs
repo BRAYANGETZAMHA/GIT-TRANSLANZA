@@ -15,6 +15,7 @@ namespace Translanza
             {
                 //Error
                 SmtpClientParam.Send(MailMessageParam);
+                //error3
                 MailMessageParam.Dispose();
             }
             catch (Exception ex)
