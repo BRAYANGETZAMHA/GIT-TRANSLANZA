@@ -22,6 +22,8 @@ namespace Translanza
             catch (Exception ex)
             {
                 //carturar
+                //llllllll
+                //dfsdfsdfdsfjsdfskdfkjdsfn
             }
         }
 
