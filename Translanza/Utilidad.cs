@@ -13,6 +13,7 @@ namespace Translanza
         {
             try
             {
+                //Error
                 SmtpClientParam.Send(MailMessageParam);
                 MailMessageParam.Dispose();
             }
