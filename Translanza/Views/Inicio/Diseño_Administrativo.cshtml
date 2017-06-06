@@ -1,0 +1,123 @@
+﻿@using Translanza.Models;
+
+@if (((Usuario)Session["Usuario"]) != null)
+{
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title></title>
+
+        <link rel="stylesheet" type="text/css" href="~/Content_Admin/estilo.css">
+        <link rel="stylesheet" type="text/css" href="~/Content_Admin/bootstrap/css/bootstrap.min.css">
+        <script type="text/javascript" src="~/Content_Admin/bootstrap/js/jquery.min.js"></script>
+        <script type="text/javascript" src="~/Content_Admin/bootstrap/js/bootstrap.min.js"></script>
+        @*datatable*@
+        <link href="~/Content_Admin/DataTable/jquery.dataTables.css" rel="stylesheet" />
+        <script src="~/Content_Admin/DataTable/jquery.dataTables.js"></script>
+        <!-- Select2 -->
+        <link rel="stylesheet" href="~/Content_Admin/select2/select2.css">
+        <script src="~/Content_Admin/select2/select2.min.js"></script>
+        @*sweetalert2*@
+        <script src="~/Content_Admin/SweetAlert2/sweetalert2.min.js"></script>
+        <link rel="stylesheet" href="~/Content_Admin/SweetAlert2/sweetalert2.min.css">
+
+        <script src="~/Content_Admin/jquery.validate.min.js"></script>
+
+
+
+    </head>
+    <body>
+        <header>
+            <div class="menu_bar">
+                <a href="#" class="bt-menu"><img style="width:100px; height:23px" src="~/Content/img/LogoPequeño.png" /></a>
+            </div>
+            <nav>
+                <ul>
+                    <li class="pantallaGrande">
+                        <a class="pantallaGrande" href="#">
+                            <img style="width:100px; height:23px " src="~/Content/img/LogoPequeño.png" />
+                        </a>
+                    </li>
+
+                    @foreach (Tipo modulo in ((List<Tipo>)Session["ListaModulo"]).OrderBy(o => o.Orden))
+                    {
+                        @*<li class="header">@modulo.Codigo</li>*@
+                    foreach (Menu menu in ((List<Menu>)Session["ListaMenu"]).Where(f => f.Tipo.RowID == modulo.RowID).OrderBy(f => f.Orden))
+                    {
+                        <li><a href="@Url.Action(menu.Metodo, menu.Controlador)"><span class="@menu.Imagen"></span>@menu.Nombre</a></li>
+                        }
+
+                    }
+                    <li class="MenuO"><a href="@Url.Action("limpiarSession", "Cuenta")"><span class="icon-house"></span>Cerrar Sesion</a></li>
+                </ul>
+            </nav>
+        </header>
+        @RenderBody()
+    </body>
+</html>
+
+
+<script type="text/javascript">
+
+    $(document).ready(main);
+
+    var contador = 1;
+
+    function main() {
+        $('.menu_bar').click(function () {
+            // $('nav').toggle();
+
+            if (contador == 1) {
+                $('nav').animate({
+                    left: '0'
+                });
+                contador = 0;
+            } else {
+                contador = 1;
+                $('nav').animate({
+                    left: '-100%'
+                });
+            }
+
+        });
+
+    };
+
+    $.validator.messages.required = 'Campo requerido';
+
+
+    function AlertaConfirmacion(encabezado, mensaje, tipo, direccion) {
+        swal({
+            title: encabezado,
+            text: mensaje,
+            type: tipo,
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '',
+            confirmButtonText: 'OK',
+            cancelButtonText: '',
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: '',
+            buttonsStyling: false
+        }).then(function () {
+            if (tipo != "error") {
+                window.location.href = direccion;
+            }
+        })
+    }
+
+    $.validator.messages.required = 'Campo requerido';
+    $.validator.messages.maxlength = 'Longitud maxima superada';
+    $.validator.messages.email = 'Email inválido';
+
+    function ModalImagen(ruta) {
+        var urlWithCont = '../Operacion/modalImagen?ruta=' + ruta;
+        $("#Dialog")
+            .load(urlWithCont.trim())
+            .dialog('open');
+    }
+
+</script>
+}

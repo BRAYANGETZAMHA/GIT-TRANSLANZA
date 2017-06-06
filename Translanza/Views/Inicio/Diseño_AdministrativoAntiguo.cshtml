@@ -1,0 +1,206 @@
+﻿@using Translanza.Models;
+
+@if (((Usuario)Session["Usuario"]) != null)
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Translanza</title>
+        <!-- jQuery 2.2.3 -->
+        <script src="~/Content_Admin/plugins/jQuery/jquery-2.2.3.min.js"></script>
+        <!-- Tell the browser to be responsive to screen width -->
+        <link href="~/Content/img/favicon.png" rel="shortcut icon" type="image/x-icon" />
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <!-- Bootstrap 3.3.6 -->
+        <link rel="stylesheet" href="~/Content_Admin/css/bootstrap.min.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+        <!-- Ionicons -->
+        @*<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">*@
+        <!-- Theme style -->
+        <link rel="stylesheet" href="~/Content_Admin/css/AdminLTE.min.css">
+        <!-- AdminLTE Skins. Choose a skin from the css/skins folder instead of downloading all of them to reduce the load. -->
+        <link rel="stylesheet" href="~/Content_Admin/css/skins/_all-skins.min.css">
+        <!-- jvectormap -->
+        @*<link rel="stylesheet" href="~/Content_Admin/plugins/jvectormap/jquery-jvectormap-1.2.2.css">*@
+        <!-- bootstrap wysihtml5 - text editor -->
+        @*<link rel="stylesheet" href="~/Content_Admin/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">*@
+        @*sweetalert2*@
+        <script src="~/Content_Admin/js/sweetalert2.min.js"></script>
+        <link rel="stylesheet" href="~/Content_Admin/css/sweetalert2.min.css">
+        @*Validaciones*@
+        <script src="~/Content_Admin/js/jquery.validate.min.js"></script>
+    </head>
+    <body class="skin-blue sidebar-mini fixed">
+        <div class="wrapper">
+            <header class="main-header">
+                <!-- Logo -->
+                <a href="index.html" class="logo">
+                    @*<p id="translaza">TRANSLAZA</p>*@
+                    <img src="~/Content/img/favicon.png" style="width:50px;height:40px;margin-left:-15px;" id="Imagen" />
+                </a>
+                <!-- Header Navbar: style can be found in header.less -->
+                <nav class="navbar navbar-static-top">
+                    <!-- Sidebar toggle button-->
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+                    @if(Session["modulo"].ToString() != "")
+                    {
+                    <a class="logo" style="text-align:left;width:300px">
+                        <p style="font-size:.8em">@Session["modulo"] <i class="fa fa-angle-right"></i><span style="font-size:.85em"> @Session["submodulo"]</span> </p>
+                    </a>
+                    }
+
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+
+                            <!-- Messages: style can be found in dropdown.less-->
+                            <li class="dropdown messages-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <span>@((((Usuario)Session["Usuario"])).NombreUsuario)  &nbsp; </span>
+                                    <i class="fa fa-chevron-down"></i>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="footer"><a href="@Url.Action("limpiarSession", "Cuenta")">Cerrar Sesi&oacute;n <i class="fa fa-sign-out"></i></a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                            </li>
+                            <!-- Notifications: style can be found in dropdown.less -->
+                            <li class="dropdown notifications-menu">
+                            </li>
+
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <!-- Left side column. contains the logo and sidebar -->
+            <aside class="main-sidebar">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- Sidebar user panel -->
+                    <ul class="sidebar-menu">
+                        @*<li class="header">Menu</li>*@
+
+                        @*@foreach (Tipo modulo in ((List<Tipo>)Session["Modulo"]).OrderBy(o => o.Orden))
+                            {
+                                <li class="treeview">
+                                    <a href="#">
+                                        <i class=""></i>
+                                        <span>@modulo.Nombre</span>
+                                        <span class="pull-right-container">
+                                            <i class="fa fa-angle-left pull-right"></i>
+                                        </span>
+                                    </a>
+                                    <ul class="treeview-menu">
+                                        @foreach (Menu menu in ((List<Menu>)Session["Menu"]).Where(f => f.Tipo.RowID == modulo.RowID).OrderBy(f => f.Orden))
+                                        {
+                                            <li><a href="@Url.Action(menu.Metodo, menu.Controlador)"><i class="@menu.Imagen"></i>@menu.Nombre</a></li>
+                                        }
+                                    </ul>
+                                </li>
+                            }*@
+
+                        @foreach (Tipo modulo in ((List<Tipo>)Session["ListaModulo"]).OrderBy(o => o.Orden))
+                        {
+                            <li class="header">@modulo.Codigo</li>
+                            foreach (Menu menu in ((List<Menu>)Session["ListaMenu"]).Where(f => f.Tipo.RowID == modulo.RowID).OrderBy(f => f.Orden))
+                            {
+                                <li><a href="@Url.Action(menu.Metodo, menu.Controlador)"><i class="@menu.Imagen"></i> <span>@menu.Nombre</span></a></li>
+                            }
+
+                        }
+
+
+
+                    </ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+
+            <!-- Content Wrapper. Contains page content -->
+            <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <!--     <section class="content-header">
+                      <h1>
+                        PANGEA
+                      </h1>
+                    </section> -->
+                @RenderBody()
+
+            </div>
+
+            <!-- Control Sidebar -->
+            <aside class="control-sidebar control-sidebar-dark">
+                <!-- Create the tabs -->
+                <ul class="nav nav-tabs nav-justified control-sidebar-tabs"></ul>
+                <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane" id="control-sidebar-home-tab">
+
+                    </div>
+                    <!-- /.tab-pane -->
+                </div>
+            </aside>
+            <!-- /.control-sidebar -->
+        </div>
+        <!-- ./wrapper -->
+        <!-- jQuery UI 1.11.4 -->
+        <script src="~/Content_Admin/plugins/jQueryUI/jquery-ui.min.js"></script>
+        <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+        @*<script>
+                $.widget.bridge('uibutton', $.ui.button);
+            </script>*@
+        <!-- Bootstrap 3.3.6 -->
+        <script src="~/Content_Admin/js/bootstrap.min.js"></script>
+        <!-- Slimscroll -->
+        <script src="~/Content_Admin/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="~/Content_Admin/js/app.min.js"></script>
+        <!-- AdminLTE for demo purposes -->
+        <script src="~/Content_Admin/js/demo.js"></script>
+        @*pace*@
+        <script data-pace-options='{ "ajax": false }' src="~/Content_Admin/plugins/pace/pace.min.js"></script>
+        @*Mensaje de campo requerido*@
+        <script>
+            function AlertaConfirmacion(encabezado, mensaje, tipo, direccion) {
+                swal({
+                    title: encabezado,
+                    text: mensaje,
+                    type: tipo,
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '',
+                    confirmButtonText: 'OK',
+                    cancelButtonText: '',
+                    confirmButtonClass: 'btn btn-success',
+                    cancelButtonClass: '',
+                    buttonsStyling: false
+                }).then(function () {
+                    if (tipo != "error") {
+                        window.location.href = direccion;
+                    }
+                })
+            }
+
+            $.validator.messages.required = 'Campo requerido';
+        </script>
+    </body>
+</html>
+}
+@*<script>
+        $(document).ready(function () {
+            $("#Imagen").slideUp('fast');
+        })
+        $(".sidebar-toggle").click(function () {
+            if ($("body").hasClass("sidebar-collapse")) {
+                $("#translaza").text("TRANSLAZA");
+            } else {
+                $("#translaza").text("");
+                $("#Imagen").slideDown('fast');
+            }
+        });
+    </script>*@

@@ -1,0 +1,82 @@
+﻿@{
+    ViewBag.Title = "VistaTerceros";
+    Layout = "~/Views/Inicio/Diseño_Administrativo.cshtml";
+}
+
+<section class="content">
+
+    <div class="col-xs-12">
+
+        <a href="@Url.Action("Vehiculo", "Operacion")"><i class="glyphicon glyphicon-plus">Nuevo</i></a>
+
+        <br /><br />
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                Vehiculo
+            </div>
+            <div class="panel-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr class="headings">
+                            <th>Placa</th>
+                            <th>Marca</th>
+                            <th>Modelo </th>
+                            <th>Tipo </th>
+                            <th>Combustible </th>
+                            <th>No. Pasajeros</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (Translanza.Models.Vehiculo item in ViewBag.Lista)
+                            {
+                            <tr>
+                                <td>@item.Placa</td>
+                                <td>@item.Tipo1.Nombre @item.Linea</td>
+                                <td>@item.Modelo</td>
+                                <td>@item.Tipo2.Nombre</td>
+                                <td>@item.Tipo.Nombre</td>
+                                <td>@item.NoPasajeros</td>
+                                <td class="last">
+                                    <a href="@Url.Action("Vehiculo", "Operacion", new { @rowid =item.RowID})">Ver</a>
+                                </td>
+                            </tr>
+                            }
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    $(function () {
+        $('#example1').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "language": {
+                "lengthMenu": "Mostar _MENU_ registros por página",
+                "zeroRecords": "Sin registros",
+                "info": "Página _PAGE_ de _PAGES_",
+                "infoEmpty": "",
+                "infoFiltered": "(Filtrado de _MAX_ registros totales)",
+                "sSearch": "Buscar:",
+                "paginate": {
+                    "previous": "Anterior",
+                    "next": "Siguiente",
+                }
+            }
+        });
+    });
+</script>
+

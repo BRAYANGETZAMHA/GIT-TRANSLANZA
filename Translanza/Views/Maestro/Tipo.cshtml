@@ -1,0 +1,140 @@
+﻿@model Translanza.Models.Tipo
+@using Translanza.Models
+
+@{
+    Layout = "~/Views/Inicio/Diseño_Administrativo.cshtml";
+}
+
+<!-- Select2 -->
+<link rel="stylesheet" href="~/Content_Admin/select2/select2.css">
+<script src="~/Content_Admin/select2/select2.min.js"></script>
+
+<section class="content">
+
+    <div class="col-xs-12">
+
+        <a href="@Url.Action("VistaTipo", "Maestro")"><i class="glyphicon glyphicon-chevron-left"></i>Volver a lista</a>
+
+        <br /><br />
+
+        <div class="panel panel-success">
+            <div class="panel-heading">Tipo</div>
+            
+            <div class="panel-body">
+
+                <form class="form-horizontal form-label-left" id="formTipo" novalidate>
+
+
+                    <input type="hidden" id="rowid" name="rowid" value="@Model.RowID" />
+
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Agrupacion:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <select id="agrupacion" name="agrupacion" style="width:100%" class="select2" required>
+
+                                <option value="" disabled selected>Seleccione una opcion</option>
+
+                                @foreach (Agrupacion item in ViewBag.listaAgrupacion)
+                                    {
+                                        if (Model.RowID > 0 && item.RowID == Model.AgrupacionID)
+                                        {
+                                    <option value="@item.RowID" selected>@item.Nombre</option>
+                                        }
+                                        else
+                                        {
+                                    <option value="@item.RowID">@item.Nombre</option>
+                                        }
+                                    }
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Codigo:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="codigo" value="@Model.Codigo" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Nombre:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="nombre" value="@Model.Nombre" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Descripción:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="descripcion" value="@Model.Descripcion" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Valor:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="valor" value="@Model.Valor" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Orden:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="number" name="orden" value="@Model.Orden" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-6 ">
+                            @*<button type="submit" class="btn btn-primary">Cancel</button>*@
+                            <button id="send" type="button" onclick="Guardar()" class="btn btn-success">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+
+    $(document).ready(function () {
+
+        $(".select2").select2();
+
+    })
+
+    function Guardar() {
+        var validator = $("#formTipo").validate();
+        if (!validator.form()) {
+            return;
+        }
+
+        var formData = new FormData(document.getElementById("formTipo"));
+
+        $.ajax({
+            type: "post",
+            url: "GuardarTipo",
+            contentType: false,
+            processData: false,
+            data: formData,
+            success: function (data) {
+                $('#rowid').val(data);
+                AlertaConfirmacion("Almacenamiento Exitoso", "", "success", "../Maestro/Tipo?rowid=" + data);
+            },
+            error: function (error) {
+                AlertaConfirmacion("Almacenamiento Incorrecto", "", "error", "");
+            }
+        })
+    }
+</script>

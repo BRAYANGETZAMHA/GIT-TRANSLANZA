@@ -1,0 +1,219 @@
+﻿@model Translanza.Models.Usuario
+@using Translanza.Models
+
+@{
+    Layout = "~/Views/Inicio/Diseño_Administrativo.cshtml";
+}
+
+<section class="content">
+
+    <div class="col-xs-12">
+
+        <div class="panel panel-success">
+            <div class="panel-heading">Usuario</div>
+            <div class="panel-body">
+
+                <form id="formUsuario">
+
+                    <input type="hidden" id="rowid" name="rowid" value="@Model.RowID" />
+
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Nombre Usuario:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="nombreusuario" value="@Model.NombreUsuario" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Contraseña:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" id="contraseña" name="contraseña" value="" class="form-control" required>
+                        </div>
+                    </div>
+
+                    @if (Model.RowID == 0)
+                    {
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Tipo:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <select name="tipo" style="width:100%" id="tipo" class="select2" required>
+                                    <option value="" disabled selected>Seleccione una opcion</option>
+                                    <option value="empleado">Empleado</option>
+                                    <option value="afiliado">Afiliado</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
+
+                    @*@if (Model.EmpleadoID > 0)
+                        {*@
+                    <div class="row form-group" id="listaEmpleado" hidden>
+                        <div class="col-md-2">
+                            <label>Empleado:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <select name="empleado" style="width:100%" class="select2" required>
+
+                                <option value="" disabled selected>Seleccione una opcion</option>
+
+                                @foreach (Empleado item in ViewBag.listaEmpleado)
+                                {
+                                    if (Model.RowID > 0 && item.RowID == Model.EmpleadoID)
+                                    {
+                                        <option value="@item.RowID" selected>@item.Identificacion - @item.Nombre @item.Apellido</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.RowID">@item.Identificacion - @item.Nombre @item.Apellido</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    @*}
+                        else
+                        {*@
+                    <div class="row form-group" id="listaAfiliado" hidden>
+                        <div class="col-md-2">
+                            <label>Afiliado:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <select name="afiliado" style="width:100%" class="select2" required>
+
+                                <option value="" disabled selected>Seleccione una opcion</option>
+
+                                @foreach (Afiliado item in ViewBag.listaAfiliado)
+                                {
+                                    if (Model.RowID > 0 && item.RowID == Model.EmpleadoID)
+                                    {
+                                        <option value="@item.RowID" selected>@item.Identificacion - @item.Nombre @item.Apellido</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.RowID">@item.Identificacion - @item.Nombre @item.Apellido</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    @*}*@
+
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Rol:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <select name="rol" style="width:100%" class="select2" required>
+
+                                <option value="" disabled selected>Seleccione una opcion</option>
+
+                                @foreach (Rol item in ViewBag.listaRol)
+                                {
+                                    if (Model.RowID > 0 && item.RowID == Model.RolID)
+                                    {
+                                        <option value="@item.RowID" selected>@item.Nombre</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.RowID">@item.Nombre</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-6 ">
+                            @*<button type="submit" class="btn btn-primary">Cancel</button>*@
+                            <button id="send" type="button" onclick="Guardar()" class="btn btn-success">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+
+    if (@Model.RowID > 0) {
+
+
+
+    }
+
+    if ("@Model.EmpleadoID" != "")
+    {
+        $("#listaEmpleado").show();
+
+    }
+    if ("@Model.AfiliadoID" != "")
+    {
+        $("#listaAfiliado").show();
+
+    }
+
+    $(document).ready(function () {
+
+        $(".select2").select2();
+
+        $("#tipo").change(function () {
+
+            if ($('#tipo').val() == "empleado") {
+                $("#listaAfiliado").hide();
+                $("#listaEmpleado").show();
+
+            }
+            else {
+                $("#listaEmpleado").hide();
+                $("#listaAfiliado").show();
+            }
+            $('.select2').css('width','100%')
+        });
+
+    })
+
+    function Guardar() {
+        @*if (@Model.RowID > 0) {
+
+            if($('#input_Licencia').val() != "")
+            {
+
+            }
+
+            $('#input_Licencia').removeAttr("required");
+            $('#input_Identificacion').removeAttr("required");
+
+        }*@
+
+        var validator = $("#formUsuario").validate();
+        if (!validator.form()) {
+            return;
+        }
+
+        var formData = new FormData(document.getElementById("formUsuario"));
+
+        $.ajax({
+            type: "post",
+            url: "GuardarUsuario",
+            contentType: false,
+            processData: false,
+            data: formData,
+            success: function (data) {
+                $('#rowid').val(data);
+                AlertaConfirmacion("Almacenamiento Exitoso", "", "success", "../Perfil/Usuario?rowid=" + data);
+            },
+            error: function (error) {
+                AlertaConfirmacion("Almacenamiento Incorrecto", "", "error", "");
+            }
+        })
+    }
+</script>

@@ -1,0 +1,541 @@
+﻿@{
+    Layout = "~/Views/Inicio/Diseño_Administrativo.cshtml";
+}
+
+@model Translanza.Models.Vehiculo
+@using Translanza.Models
+
+<!-- InputMask -->
+<script src="~/Content_Admin/mask/jquery.mask.min.js"></script>
+
+@if (Session["Usuario"] != null)
+{
+    <section class="content">
+        <div class="col-xs-12">
+
+            <a href="@Url.Action("VistaVehiculo", "Operacion")"><i class="glyphicon glyphicon-chevron-left"></i>Volver a lista</a>
+
+            <br /><br />
+
+            <div class="panel panel-success">
+                <div class="panel-heading">Vehiculo</div>
+                <div class="panel-body">
+
+                    <form class="form-horizontal form-label-left" id="formVehiculo" novalidate>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Propietario:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <select style="width:100%" name="propietario" class="select2" required>
+
+                                    <option value="" disabled selected>Seleccione una opcion</option>
+
+                                    @foreach (Afiliado item in ViewBag.listaPropietario)
+                                        {
+                                            if (Model.RowID > 0 && item.RowID == Model.AfiliadoID)
+                                            {
+                                        <option value="@item.RowID" selected>@item.Identificacion - @item.Nombre @item.Apellido</option>
+                                            }
+                                            else
+                                            {
+                                        <option value="@item.RowID">@item.Identificacion - @item.Nombre @item.Apellido</option>
+                                            }
+                                        }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Placa:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="hidden" id="rowid" name="rowid" value="@Model.RowID" />
+                                <input type="text" id="placa" name="placa" value="@Model.Placa" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Marca:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <select style="width:100%" id="marca" name="marca" class="select2" required>
+
+                                    <option value="" disabled selected>Seleccione una opcion</option>
+
+                                    @foreach (Tipo item in ViewBag.listaMarca)
+                                        {
+                                            if (Model.RowID > 0 && item.RowID == Model.Tipo1.RowID)
+                                            {
+                                        <option value="@item.RowID" selected>@item.Nombre</option>
+                                            }
+                                            else
+                                            {
+                                        <option value="@item.RowID">@item.Nombre</option>
+                                            }
+                                        }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Tipo Vehiculo:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <select style="width:100%" id="tipoVehiculo" name="tipoVehiculo" class="select2" required>
+
+                                    <option value="" disabled selected>Seleccione una opcion</option>
+
+                                    @foreach (Tipo item in ViewBag.listaTipoVehiculo)
+                                        {
+                                            if (Model.RowID > 0 && item.RowID == Model.Tipo2.RowID)
+                                            {
+                                        <option value="@item.RowID" selected>@item.Nombre</option>
+                                            }
+                                            else
+                                            {
+                                        <option value="@item.RowID">@item.Nombre</option>
+                                            }
+                                        }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Combustible:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <select style="width:100%" id="tipoCombustible" name="tipoCombustible" class="select2" required>
+
+                                    <option value="" disabled selected>Seleccione una opcion</option>
+
+                                    @foreach (Tipo item in ViewBag.listaTipoCombustible)
+                                        {
+                                            if (Model.RowID > 0 && item.RowID == Model.Tipo.RowID)
+                                            {
+                                        <option value="@item.RowID" selected>@item.Nombre</option>
+                                            }
+                                            else
+                                            {
+                                        <option value="@item.RowID">@item.Nombre</option>
+                                            }
+                                        }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Modelo:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="modelo" value="@Model.Modelo" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Linea:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" name="linea" value="@Model.Linea" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label for="number">No. Pasajeros:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="number" name="nopasajeros" value="@Model.NoPasajeros" class="form-control" required>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Tarjeta Operación:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="file" id="input_TarjetaOperacion" name="input_TarjetaOperacion" class="form-control img_TarjetaOperacion" value="@Model.Img_TarjetaOperacion" required>
+                                <input type="hidden" id="archivoRutaTarjetaOperacion" name="archivoRutaTarjetaOperacion" />
+                            </div>
+                            <div class="thumbnail col-md-3" style="border:none;">
+                                <img class="preview_TarjetaOperacion" src="@Model.Img_TarjetaOperacion" width="100%" height="100%" onclick="ModalImagen('@Model.Img_TarjetaOperacion')">
+                                @*onmouseover="this.width=300;this.height=200;" onmouseout="this.width=206;this.height=148;"*@
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Tecnomecanica:*</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input id="input_Tecnomecanica" name="input_Tecnomecanica" class="form-control img_Tecnomecanica" value="@Model.Img_Tecnomecanica" type="file" required>
+                                <input type="hidden" name="archivoRutaTecnomecanica" id="archivoRutaTecnomecanica" />
+                            </div>
+                            <div class="thumbnail col-md-3" style="border:none;">
+                                <img class="preview_Tecnomecanica" src="@Model.Img_Tecnomecanica" width="100%" height="100%" onclick="ModalImagen('@Model.Img_Tecnomecanica')">
+                                @*onmouseover="this.width=300;this.height=200;" onmouseout="this.width=206;this.height=148;"*@
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Venc. Tecnomecanica:*</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input id="fecha_Tecnomecanica" name="fecha_Tecnomecanica" class="form-control fecha" value="@Model.Vencimiento_Tecnomecanica" type="text" required>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Soat:*</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input id="input_Soat" name="input_Soat" class="form-control img_Soat" value="@Model.Img_Soat" type="file" required>
+                                <input type="hidden" id="archivoRutaSoat" name="archivoRutaSoat" />
+                            </div>
+                            <div class="thumbnail col-md-3" style="border:none;">
+                                <img class="preview_Soat" src="@Model.Img_Soat" width="100%" height="100%" onclick="ModalImagen('@Model.Img_Soat')">
+                                @*onmouseover="this.width=300;this.height=200;" onmouseout="this.width=206;this.height=148;"*@
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Vencimiento Soat:*</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input id="fecha_Soat" name="fecha_Soat" class="form-control fecha" value="@Model.Vencimiento_Soat" type="text" required>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Seguro Responsabilidad Civil:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input id="input_SeguroCivil" name="input_SeguroCivil" class="form-control img_SeguroCivil" value="@Model.Img_SeguroCivil" type="file" required>
+                                <input type="hidden" id="archivoRutaSeguroCivil" name="archivoRutaSeguroCivil" />
+                            </div>
+                            <div class="thumbnail col-md-3" style="border:none;">
+                                <img class="preview_SeguroCivil" src="@Model.Img_SeguroCivil" width="100%" height="100%" onclick="ModalImagen('@Model.Img_SeguroCivil')">
+                                @*onmouseover="this.width=300;this.height=200;" onmouseout="this.width=206;this.height=148;"*@
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Venc. Seguro Responsabilidad Civil:*</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input id="fecha_SeguroCivil" name="fecha_SeguroCivil" class="form-control fecha" value="@Model.Vencimiento_SeguroCivil" type="text" required>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Tarjeta Propiedad:*</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input id="input_TarjetaPropiedad" name="input_TarjetaPropiedad" class="form-control img_TarjetaPropiedad" value="@Model.Img_TarjetaPropiedad" type="file" required>
+                                <input type="hidden" id="archivoRutaTarjetaPropiedad" name="archivoRutaTarjetaPropiedad" />
+                            </div>
+                            <div class="thumbnail col-md-3" style="border:none;">
+                                <img class="preview_TarjetaPropiedad" src="@Model.Img_TarjetaPropiedad" width="100%" height="100%" onclick="ModalImagen('@Model.Img_TarjetaPropiedad')">
+                                @*onmouseover="this.width=300;this.height=200;" onmouseout="this.width=206;this.height=148;"*@
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Vehiculo:*</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input id="input_Vehiculo" name="input_Vehiculo" class="form-control img_Vehiculo" type="file" required>
+                                <input type="hidden" id="archivoRutaVehiculo" name="archivoRutaVehiculo" />
+                            </div>
+                            <div class="thumbnail col-md-3" style="border:none;">
+                                <img class="preview_Vehiculo" width="100%" height="100%" src="@Model.Img_Vehiculo" onclick="ModalImagen('@Model.Img_Vehiculo')">
+                                @*onmouseover="this.width=300;this.height=200;" onmouseout="this.width=206;this.height=148;"*@
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Estado:</label>
+                            </div>
+                            <div class="col-md-4 btn-group" data-toggle="buttons">
+                                <label class="btn btn-default" id="lblinactivo">
+                                    <input type="radio" name="inactivo" id="inactivo">Inactivo
+                                </label>
+                                <label class="btn btn-default btn-primary" id="lblactivo">
+                                    <input type="radio" name="activo" id="activo">Activo
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <div class="col-md-6 ">
+                                @*<button type="submit" class="btn btn-primary">Cancel</button>*@
+                                <button id="send" type="button" onclick="Guardar()" class="btn btn-success">Guardar</button>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    if (Model.RowID > 0)
+    {
+    <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Observaciones</h3>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+
+                            <form id="formObservacion" method="post">
+
+                                <input type="hidden" name="rowid" value="@Model.RowID" />
+
+                                <div class="row form-group">
+                                    <div class="col-md-2">
+                                        <label>Descripción:</label>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" name="descripcion" class="form-control" required>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button id="send" type="button" onclick="GuardarObservacion()" class="btn btn-success">Guardar</button>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="col-md-12">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Observación</th>
+                                                    <th>Usuario Creación</th>
+                                                    <th>Fecha Creación</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (Translanza.Models.ObservacionVehiculo item in ViewBag.listaObservacion)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Descripcion</td>
+                                                        <td>@item.UsuarioCreacion</td>
+                                                        <td>@item.FechaCreacion</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+
+    <script>
+
+        if (@Model.RowID>0) {
+
+            if ("@Model.Activo"=="True") {
+                $('#activo').attr('checked',true);
+                $('#lblactivo').addClass("btn-primary");
+            }
+            else{
+                $('#inactivo').attr('checked',true);
+                $('#lblinactivo').addClass("btn-primary");
+            }
+        }
+
+        $(document).ready(function () {
+
+            $(".select2").select2();
+
+            $('#lblactivo').click(function(){
+                $('#activo').attr('checked',true);
+                $('#inactivo').attr('checked',false);
+                $('#lblactivo').addClass("btn-primary");
+                $('#lblinactivo').removeClass("btn-primary");
+            })
+
+            $('#lblinactivo').click(function(){
+                $('#activo').attr('checked',false);
+                $('#inactivo').attr('checked',true);
+                $('#lblactivo').removeClass("btn-primary");
+                $('#lblinactivo').addClass("btn-primary");
+            })
+
+            //Mascaras
+            $(".fecha").mask('00/00/0000', {"placeholder": "dd/mm/yyyy"});
+            $('#placa').mask('LLL-NNN', {
+                translation: {
+                    //A: { pattern: /[A-Za-z0-9]/ },
+                    L: { pattern: /[A-Za-z]/ },
+                    N: { pattern: /[0-9]/ }
+                },
+                placeholder: "AAA-000"
+            });
+
+            $("#input_TarjetaOperacion").change(function () {
+                var preview = document.querySelector('.preview_TarjetaOperacion');
+                var file = document.querySelector('.img_TarjetaOperacion').files[0];
+                var reader = new FileReader();
+                reader.onloadend = function () {
+                    preview.src = reader.result;
+                    $('#archivoRutaTarjetaOperacion').val(reader.result)
+                }
+                if (file) {
+                    reader.readAsDataURL(file);
+                } else {
+                }
+            });
+
+            $("#input_Tecnomecanica").change(function () {
+                var preview = document.querySelector('.preview_Tecnomecanica');
+                var file = document.querySelector('.img_Tecnomecanica').files[0];
+                var reader = new FileReader();
+                reader.onloadend = function () {
+                    preview.src = reader.result;
+                    $('#archivoRutaTecnomecanica').val(reader.result)
+                }
+                if (file) {
+                    reader.readAsDataURL(file);
+                } else {
+                }
+            });
+
+            $("#input_Soat").change(function () {
+                var preview = document.querySelector('.preview_Soat');
+                var file = document.querySelector('.img_Soat').files[0];
+                var reader = new FileReader();
+                reader.onloadend = function () {
+                    preview.src = reader.result;
+                    $('#archivoRutaSoat').val(reader.result)
+                }
+                if (file) {
+                    reader.readAsDataURL(file);
+                } else {
+                }
+            });
+
+            $("#input_SeguroCivil").change(function () {
+                var preview = document.querySelector('.preview_SeguroCivil');
+                var file = document.querySelector('.img_SeguroCivil').files[0];
+                var reader = new FileReader();
+                reader.onloadend = function () {
+                    preview.src = reader.result;
+                    $('#archivoRutaSeguroCivil').val(reader.result)
+                }
+                if (file) {
+                    reader.readAsDataURL(file);
+                } else {
+                }
+            });
+
+            $("#input_TarjetaPropiedad").change(function () {
+                var preview = document.querySelector('.preview_TarjetaPropiedad');
+                var file = document.querySelector('.img_TarjetaPropiedad').files[0];
+                var reader = new FileReader();
+                reader.onloadend = function () {
+                    preview.src = reader.result;
+                    $('#archivoRutaTarjetaPropiedad').val(reader.result)
+                }
+                if (file) {
+                    reader.readAsDataURL(file);
+                } else {
+                }
+            });
+
+            $("#input_Vehiculo").change(function () {
+                var preview = document.querySelector('.preview_Vehiculo');
+                var file = document.querySelector('.img_Vehiculo').files[0];
+                var reader = new FileReader();
+                reader.onloadend = function () {
+                    preview.src = reader.result;
+                    $('#archivoRutaVehiculo').val(reader.result)
+                }
+                if (file) {
+                    reader.readAsDataURL(file);
+                } else {
+                }
+            });
+
+        })
+
+        function Guardar()
+        {
+            if (@Model.RowID > 0) {
+                $('#input_TarjetaOperacion').removeAttr("required");
+                $('#input_Tecnomecanica').removeAttr("required");
+                $('#input_Soat').removeAttr("required");
+                $('#input_SeguroCivil').removeAttr("required");
+                $('#input_TarjetaPropiedad').removeAttr("required");
+                $('#input_Vehiculo').removeAttr("required");
+            }
+
+
+
+            var validator = $("#formVehiculo").validate();
+            if(!validator.form())
+            {
+                return;
+            }
+
+            var formData = new FormData(document.getElementById("formVehiculo"));
+
+            $.ajax({
+                type:"post",
+                url: "GuardarVehiculo",
+                contentType: false,
+                processData: false,
+                data:formData,
+                success: function (data) {
+                    $('#rowid').val(data);
+                    AlertaConfirmacion("Almacenamiento Exitoso","","success","../Operacion/Vehiculo?rowid="+data);
+                },
+                error: function (error) {
+                    AlertaConfirmacion("Almacenamiento Incorrecto","","error","");
+                }
+            })
+        }
+
+        function GuardarObservacion()
+        {
+            var validator = $("#formObservacion").validate();
+            if(!validator.form())
+            {
+                return;
+            }
+
+            var formData = new FormData(document.getElementById("formObservacion"));
+
+            $.ajax({
+                type:"post",
+                url: "GuardarObservacionVehiculo",
+                contentType: false,
+                processData: false,
+                data: formData,
+                success: function (data) {
+                    $('#rowid').val(data);
+                    AlertaConfirmacion("Almacenamiento Exitoso","","success","../Operacion/Vehiculo?rowid="+data);
+                },
+                error: function (error) {
+                    AlertaConfirmacion("Almacenamiento Incorrecto","","error","");
+                }
+            })
+        }
+    </script>
+}

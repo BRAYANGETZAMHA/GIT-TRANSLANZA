@@ -1,0 +1,185 @@
+﻿@model Translanza.Models.Afiliado
+@{
+    ViewBag.Title = "Terceros";
+    Layout = "~/Views/Inicio/Diseño_Administrativo.cshtml";
+}
+
+<section class="content">
+    <div class="col-xs-12">
+
+        <a href="@Url.Action("VistaAfiliado", "Operacion")"><i class="glyphicon glyphicon-chevron-left"></i>Volver a lista</a>
+
+        <br /><br />
+
+        <div class="panel panel-success">
+            <div class="panel-heading">Afiliado</div>
+            <div class="panel-body">
+                <form id="form" method="post">
+                    <input type="hidden" id="rowid" name="rowid" value="@Model.RowID" />
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Identificación:*</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="number" id="identificacion" name="identificacion" value="@Model.Identificacion" required class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Nombres:*</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" id="nombres" name="nombres" value="@Model.Nombre" required class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Apellidos:*</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" id="apellidos" name="apellidos" value="@Model.Apellido" required class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Telefono:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="number" id="telefono" name="telefono" maxlength="10" value="@Model.Telefono" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Celular:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="number" id="celular" name="celular" value="@Model.Celular" maxlength="10" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Dirección:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" name="direccion" value="@Model.Direccion" maxlength="50" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Correo:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="email" name="correo" value="@Model.Correo" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Doc. Identidad:*</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="file" id="input_Identificacion" name="input_Identificacion" class="form-control img_Identificacion" value="@Model.Img_DocIdentidad" accept="image/*" required>
+                            <input type="hidden" id="archivoRutaIdentificacion" name="archivoRutaIdentificacion" />
+                        </div>
+                        <div class="thumbnail col-md-3" style="border:none;">
+                            <img class="preview_Identificacion" src="@Model.Img_DocIdentidad" width="100%" height="50%" onclick="ModalImagen('@Model.Img_DocIdentidad')">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Estado:</label>
+                        </div>
+                        <div class="col-md-4 btn-group" data-toggle="buttons">
+                            <label class="btn btn-default" id="lblinactivo">
+                                <input type="radio" name="inactivo" id="inactivo">Inactivo
+                            </label>
+                            <label class="btn btn-default" id="lblactivo">
+                                <input type="radio" name="activo" id="activo">Activo
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6 ">
+                            <button id="send" type="button" onclick="Guardar()" class="btn btn-success">Guardar</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+
+    if (@Model.RowID>0) {
+
+        if ("@Model.Activo"=="True") {
+            $('#activo').attr('checked',true);
+            $('#lblactivo').addClass("btn-primary");
+        }
+        else{
+            $('#inactivo').attr('checked',true);
+            $('#lblinactivo').addClass("btn-primary");
+            //$('#lblactivo').removeClass("btn-primary");
+        }
+    }
+
+    $(document).ready(function () {
+
+        $('#lblactivo').click(function () {
+            $('#activo').attr('checked', true);
+            $('#inactivo').attr('checked', false);
+            $('#lblactivo').addClass("btn-primary");
+            $('#lblinactivo').removeClass("btn-primary");
+        })
+
+        $('#lblinactivo').click(function () {
+            $('#activo').attr('checked', false);
+            $('#inactivo').attr('checked', true);
+            $('#lblactivo').removeClass("btn-primary");
+            $('#lblinactivo').addClass("btn-primary");
+        })
+
+        $("#input_Identificacion").change(function () {
+            var preview = document.querySelector('.preview_Identificacion');
+            var file = document.querySelector('.img_Identificacion').files[0];
+            var reader = new FileReader();
+            reader.onloadend = function () {
+                preview.src = reader.result;
+                $('#archivoRutaIdentificacion').val(reader.result)
+            }
+            if (file) {
+                reader.readAsDataURL(file);
+            } else {
+            }
+        })
+    })
+
+
+    function Guardar()
+    {
+        if (@Model.RowID > 0) {
+            $('#input_Identificacion').removeAttr("required");
+
+        }
+        var validator = $("#form").validate();
+        if (!validator.form()) {
+            return;
+        }
+
+        var formData = new FormData(document.getElementById("form"));
+        $.ajax({
+            type: "post",
+            url: "GuardarAfiliado",
+            contentType: false,
+            processData: false,
+            data: formData,
+            success: function (data) {
+                $('#rowid').val(data);
+                AlertaConfirmacion("Almacenamiento Exitoso", "", "success", "../Operacion/Afiliado?rowid=" + data);
+            },
+            error: function (error) {
+                AlertaConfirmacion("Almacenamiento Incorrecto", "", "error", "");
+            }
+        })
+    }
+</script>

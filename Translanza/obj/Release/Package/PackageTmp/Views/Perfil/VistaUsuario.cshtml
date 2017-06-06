@@ -1,0 +1,109 @@
+﻿@{
+    Layout = "~/Views/Inicio/Diseño_Administrativo.cshtml";
+}
+
+<!-- DataTables -->
+<link rel="stylesheet" href="~/Content_Admin/plugins/datatables/dataTables.bootstrap.css">
+
+
+<!-- Main content -->
+<section class="content">
+        <div class="col-xs-12">
+
+            <a href="@Url.Action("Usuario", "Perfil")"><i class="glyphicon glyphicon-plus">Nuevo</i></a>
+
+            <br /><br />
+
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                    Lista usuario
+                </div>
+                <div class="panel-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Rol </th>
+                                <th>Empleado</th>
+                                <th>Afiliado</th>
+                                <th>Estado </th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (Translanza.Models.Usuario item in ViewBag.ListaUsuario)
+                            {
+                                <tr>
+                                    <td>@item.NombreUsuario</td>
+                                    <td>@item.Rol.Nombre</td>
+                                    @if (item.EmpleadoID > 0)
+                                    {
+                                        <td>@item.Empleado.Nombre @item.Empleado.Apellido</td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }
+
+                                    @if (item.AfiliadoID > 0)
+                                    {
+                                        <td>@item.Afiliado.Nombre @item.Afiliado.Apellido</td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }
+
+                                    @if (item.Activo == true)
+                                    {
+                                        <td>Activo</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Inactivo</td>
+                                    }
+                                    <td class=" last">
+                                        <a href="@Url.Action("Usuario", "Perfil", new { @rowid =item.RowID})">Ver</a>
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+        </div>
+</section>
+
+<!-- DataTables -->
+<script src="~/Content_Admin/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="~/Content_Admin/plugins/datatables/dataTables.bootstrap.min.js"></script>
+
+<script>
+    $(function () {
+        $('#example1').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "language": {
+                "lengthMenu": "Mostar _MENU_ registros por página",
+                "zeroRecords": "Sin registros",
+                "info": "Página _PAGE_ de _PAGES_",
+                "infoEmpty": "",
+                "infoFiltered": "(Filtrado de _MAX_ registros totales)",
+                "sSearch": "Buscar:",
+                "paginate": {
+                    "previous": "Anterior",
+                    "next": "Siguiente",
+                }
+            }
+        });
+    });
+</script>
+

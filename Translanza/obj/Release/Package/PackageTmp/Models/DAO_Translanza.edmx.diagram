@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7b88546cb5e0448cb2319a73aa67c35f" Name="Diagram1" ZoomLevel="73">
+        <EntityTypeShape EntityType="TranslanzaModel.Agrupacion" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="TranslanzaModel.Tipo" Width="1.5" PointX="3" PointY="7.875" />
+        <EntityTypeShape EntityType="TranslanzaModel.Afiliado" Width="1.5" PointX="3.75" PointY="1.125" />
+        <EntityTypeShape EntityType="TranslanzaModel.Empleado" Width="1.5" PointX="8.25" PointY="23" />
+        <EntityTypeShape EntityType="TranslanzaModel.Vehiculo" Width="1.5" PointX="5.25" PointY="6.875" />
+        <EntityTypeShape EntityType="TranslanzaModel.Menu" Width="1.5" PointX="5.25" PointY="17.875" />
+        <EntityTypeShape EntityType="TranslanzaModel.Rol" Width="1.5" PointX="5.25" PointY="23.375" />
+        <EntityTypeShape EntityType="TranslanzaModel.RolMenu" Width="1.5" PointX="7.5" PointY="18.25" />
+        <EntityTypeShape EntityType="TranslanzaModel.Usuario" Width="1.5" PointX="10.5" PointY="12" />
+        <AssociationConnector Association="TranslanzaModel.FK_Tipo_Agrupacion" />
+        <AssociationConnector Association="TranslanzaModel.FK__Vehiculo__Combus__1E3A7A34" />
+        <AssociationConnector Association="TranslanzaModel.FK__Vehiculo__MarcaI__1F2E9E6D" />
+        <AssociationConnector Association="TranslanzaModel.FK__Vehiculo__TipoID__2116E6DF" />
+        <AssociationConnector Association="TranslanzaModel.FK_Menu_Tipo" />
+        <AssociationConnector Association="TranslanzaModel.FK__Usuario__Afiliad__2C88998B" />
+        <AssociationConnector Association="TranslanzaModel.FK__Vehiculo__Afilia__2022C2A6" />
+        <AssociationConnector Association="TranslanzaModel.FK__Usuario__Emplead__2B947552" />
+        <AssociationConnector Association="TranslanzaModel.FK__RolMenu__MenuID__0B5CAFEA" />
+        <AssociationConnector Association="TranslanzaModel.FK__RolMenu__MenuID__0C50D423" />
+        <AssociationConnector Association="TranslanzaModel.FK__RolMenu__RolID__0D44F85C" />
+        <AssociationConnector Association="TranslanzaModel.FK__RolMenu__RolID__0E391C95" />
+        <AssociationConnector Association="TranslanzaModel.FK__Usuario__RolID__2AA05119" />
+        <EntityTypeShape EntityType="TranslanzaModel.Especialidad" Width="1.5" PointX="8.25" PointY="5.5" />
+        <EntityTypeShape EntityType="TranslanzaModel.ObservacionConductor" Width="1.5" PointX="8.25" PointY="1.875" />
+        <EntityTypeShape EntityType="TranslanzaModel.ObservacionVehiculo" Width="1.5" PointX="9.125" PointY="8.625" />
+        <AssociationConnector Association="TranslanzaModel.FK__Especiali__TipoI__3AA1AEB8" />
+        <AssociationConnector Association="TranslanzaModel.FK__Observaci__Vehic__3D7E1B63" />
+        <EntityTypeShape EntityType="TranslanzaModel.Conductor" Width="1.5" PointX="6" PointY="0.875" />
+        <AssociationConnector Association="TranslanzaModel.FK__Conductor__Afili__4CC05EF3" />
+        <AssociationConnector Association="TranslanzaModel.FK__Especiali__Condu__4F9CCB9E" />
+        <AssociationConnector Association="TranslanzaModel.FK__Observaci__Condu__536D5C82" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

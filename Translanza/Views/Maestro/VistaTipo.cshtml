@@ -1,0 +1,82 @@
+﻿@{
+    Layout = "~/Views/Inicio/Diseño_Administrativo.cshtml";
+}
+
+<section class="content">
+    <div class="col-xs-12">
+
+        <a href="@Url.Action("Tipo", "Maestro")"><i class="glyphicon glyphicon-plus">Nuevo</i></a>
+
+        <br/><br />
+
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                Listado de tipo
+            </div>
+            <div class="panel-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Agrupación</th>
+                            <th>Código </th>
+                            <th>Nombre</th>
+                            <th>Descripción</th>
+                            <th>Estado </th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (Translanza.Models.Tipo item in ViewBag.ListaTipo)
+                        {
+                            <tr>
+                                <td>@item.Agrupacion.Nombre</td>
+                                <td>@item.Codigo</td>
+                                <td>@item.Nombre</td>
+                                <td>@item.Descripcion</td>
+                                @if (item.Activo == true)
+                                {
+                                    <td>Activo</td>
+                                }
+                                else
+                                {
+                                    <td>Inactivo</td>
+                                }
+                                <td class="last">
+                                    <a href="@Url.Action("Tipo", "Maestro", new { @rowid =item.RowID})">Ver</a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    $(function () {
+        $('#example1').DataTable({
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "language": {
+                "lengthMenu": "Mostar _MENU_ registros por página",
+                "zeroRecords": "Sin registros",
+                "info": "Página _PAGE_ de _PAGES_",
+                "infoEmpty": "",
+                "infoFiltered": "(Filtrado de _MAX_ registros totales)",
+                "sSearch": "Buscar:",
+                "paginate": {
+                    "previous": "Anterior",
+                    "next": "Siguiente",
+                }
+            }
+        });
+    });
+</script>
+

@@ -1,0 +1,162 @@
+﻿@{
+    ViewBag.Title = "Mi perfil";
+    Layout = "~/Views/Inicio/Diseño_Administrativo.cshtml";
+}
+
+<section class="content">
+    <div class="col-md-6">
+        <div class="panel panel-success">
+            <div class="panel-heading">Informacion Personal</div>
+
+            <div class="panel-body">
+                <form id="formPerfil" method="post">
+                    <div class="row form-group">
+                        <div class="col-md-4">
+                            <label>Identificación:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="hidden" id="rowid" name="rowid" value="@ViewBag.Empleado.RowID" />
+                            <input type="number" id="identificacion" name="identificacion" value="@ViewBag.Empleado.Identificacion" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-4">
+                            <label>Nombres:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" id="nombres" name="nombres" value="@ViewBag.Empleado.Nombre" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-4">
+                            <label>Apellidos:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" id="apellidos" name="apellidos" value="@ViewBag.Empleado.Apellido" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-4">
+                            <label>Telefono:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="number" id="telefono" name="telefono" value="@ViewBag.Empleado.Telefono" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-4">
+                            <label>Celular:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="number" id="celular" name="celular" value="@ViewBag.Empleado.Celular" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-4">
+                            <label>Correo:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="email" id="correo" name="correo" value="@ViewBag.Empleado.Correo" class="form-control" required>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6 ">
+                            @*<button type="submit" class="btn btn-primary">Cancel</button>*@
+                            <button id="send" type="button" onclick="GuardarPerfil()" class="btn btn-success">Actualizar</button>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+
+        <div class="panel panel-success">
+            <div class="panel-heading">Información Ingreso</div>
+            <div class="panel-body">
+
+                <form id="formUsuario" method="post">
+
+                    <input type="hidden" id="rowid" name="rowid" value="@ViewBag.Usuario.RowID" />
+
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Usuario:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" id="usuario" name="usuario" value="@ViewBag.Usuario.NombreUsuario" required="required" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Contraseña:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="password" id="contraseña" name="contraseña" required="required" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-md-6 ">
+                            @*<button type="submit" class="btn btn-primary">Cancel</button>*@
+                            <button id="send" type="button" onclick="GuardarContraseña()" class="btn btn-success">Actualizar</button>
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<script>
+
+    function GuardarPerfil() {
+        var validator = $("#formPerfil").validate();
+        if (!validator.form()) {
+            return;
+        }
+
+        var formData = new FormData(document.getElementById("formPerfil"));
+        $.ajax({
+            type: "post",
+            url: "GuardarPerfil",
+            contentType: false,
+            processData: false,
+            data: formData,
+            success: function (data) {
+                $('#rowid').val(data);
+                AlertaConfirmacion("Actualizacion Exitosa", "", "success", "../Perfil/MiPerfil?rowid=" + data);
+            },
+            error: function (error) {
+                AlertaConfirmacion("Actualizacion Incorrecta", "", "error", "");
+            }
+        })
+    }
+
+    function GuardarContraseña() {
+        var validator = $("#formUsuario").validate();
+        if (!validator.form()) {
+            return;
+        }
+
+        var formData = new FormData(document.getElementById("formUsuario"));
+        $.ajax({
+            type: "post",
+            url: "GuardarContraseña",
+            contentType: false,
+            processData: false,
+            data: formData,
+            success: function (data) {
+                $('#rowid').val(data);
+                AlertaConfirmacion("Actualizacion Exitosa", "", "success", "../Perfil/MiPerfil?rowid=" + data);
+            },
+            error: function (error) {
+                AlertaConfirmacion("Actualizacion Incorrecta", "", "error", "");
+            }
+        })
+    }
+</script>
