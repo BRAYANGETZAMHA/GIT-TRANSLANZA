@@ -9,8 +9,6 @@ namespace Translanza
 {
     public class Utilidad
     {
-        //Hola prueba git
-        //2
         public static void SendEmail(MailMessage MailMessageParam, SmtpClient SmtpClientParam)
         {
             try
