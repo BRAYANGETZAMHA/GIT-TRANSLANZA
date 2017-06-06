@@ -13,22 +13,13 @@ namespace Translanza
         {
             try
             {
-                //Error
                 SmtpClientParam.Send(MailMessageParam);
-                //error3
                 MailMessageParam.Dispose();
-                //Error2
             }
             catch (Exception ex)
             {
-                //carturar
-                //llllllll
-                //dfsdfsdfdsfjsdfskdfkjdsfn
+
             }
-
-            //77777sjhasdjasd
-
-            //777asjasdjads
         }
 
     }
