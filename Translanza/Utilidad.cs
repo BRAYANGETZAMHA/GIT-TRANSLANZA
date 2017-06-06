@@ -20,7 +20,7 @@ namespace Translanza
             }
             catch (Exception ex)
             {
-                
+                //carturar
             }
         }
 
