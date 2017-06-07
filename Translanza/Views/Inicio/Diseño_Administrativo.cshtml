@@ -31,7 +31,7 @@
     <body>
         <header>
             <div class="menu_bar">
-                <a href="#" class="bt-menu"><img style="width:100px; height:23px" src="~/Content/img/LogoPequeño.png" /></a>
+                <a href="#" class="bt-menu" id="grande"><img style="width:100px; height:23px" src="~/Content/img/LogoPequeño.png" /></a>
             </div>
             <nav>
                 <ul>
@@ -54,7 +54,12 @@
                 </ul>
             </nav>
         </header>
-        @RenderBody()
+        <content>
+            <div class="contenido">
+                @RenderBody()
+            </div>
+        </content>
+
     </body>
 </html>
 

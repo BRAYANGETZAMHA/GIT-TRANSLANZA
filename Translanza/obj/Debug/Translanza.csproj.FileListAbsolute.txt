@@ -84,3 +84,46 @@ D:\PC\Documents\Translanza\Proyecto\GIT\Translanza\bin\es\System.Web.Mvc.resourc
 D:\PC\Documents\Translanza\Proyecto\GIT\Translanza\obj\Debug\Translanza.csprojResolveAssemblyReference.cache
 D:\PC\Documents\Translanza\Proyecto\GIT\Translanza\obj\Debug\Translanza.dll
 D:\PC\Documents\Translanza\Proyecto\GIT\Translanza\obj\Debug\Translanza.pdb
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\roslyn\csc.exe
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\roslyn\vbc.exe
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\roslyn\VBCSCompiler.exe
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\Translanza.dll.config
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\Translanza.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\Translanza.pdb
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\EntityFramework.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\EntityFramework.SqlServer.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\System.Web.Helpers.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\System.Web.Mvc.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\System.Web.Razor.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\System.Web.Webpages.Deployment.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\System.Web.Webpages.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\System.Web.Webpages.Razor.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\EntityFramework.xml
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\EntityFramework.SqlServer.xml
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\System.Web.Razor.xml
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\System.Web.Webpages.xml
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\System.Web.Webpages.Deployment.xml
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\System.Web.Webpages.Razor.xml
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\System.Web.Helpers.xml
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\System.Web.Mvc.xml
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\es\System.Web.Razor.resources.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\es\System.Web.Webpages.resources.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\es\System.Web.Webpages.Deployment.resources.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\es\System.Web.Webpages.Razor.resources.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\es\System.Web.Helpers.resources.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\bin\es\System.Web.Mvc.resources.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\obj\Debug\Translanza.csprojResolveAssemblyReference.cache
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\obj\Debug\Translanza.dll
+C:\Users\Pangea\Documents\Pangea Business Solutions\GitHub\GIT-TRANSLANZA\Translanza\obj\Debug\Translanza.pdb
