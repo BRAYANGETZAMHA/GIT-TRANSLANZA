@@ -289,17 +289,13 @@
     {
     <!-- Main content -->
         <section class="content">
-            <div class="row">
                 <div class="col-xs-12">
 
-                    <div class="box box-primary">
-                        <div class="box-header with-border">
-                            <h3 class="box-title">Observaciones</h3>
-                        </div>
-                        <!-- /.box-header -->
-                        <div class="box-body">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">Observaciones</div>
+                        <div class="panel-body">
 
-                            <form id="formObservacion" method="post">
+                            <form id="formObservacion">
 
                                 <input type="hidden" name="rowid" value="@Model.RowID" />
 
@@ -320,9 +316,9 @@
                                         <table class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th>Observación</th>
-                                                    <th>Usuario Creación</th>
-                                                    <th>Fecha Creación</th>
+                                                    <th style="width:50%">Observación</th>
+                                                    <th style="width:25%">Usuario Creación</th>
+                                                    <th style="width:25%">Fecha Creación</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -342,7 +338,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </section>
     }
 

@@ -82,11 +82,11 @@ section {
         position: fixed;
     }
 
-    header nav ul li {
-        display: block;
-        float: none;
-        border-bottom: 1px solid rgba(255,255,255, .3);
-    }
+        header nav ul li {
+            display: block;
+            float: none;
+            border-bottom: 1px solid rgba(255,255,255, .3);
+        }
 
     .menu_bar {
         display: block;
@@ -94,25 +94,29 @@ section {
         background: #ccc;
     }
 
-    .menu_bar .bt-menu {
-        display: block;
-        padding: 10px;
-        background: #000000;
-        color: #fff;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 25px;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-    }
+        .menu_bar .bt-menu {
+            display: block;
+            padding: 10px;
+            background: #000000;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 25px;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
 
-    .menu_bar span {
-        float: right;
-        font-size: 40px;
-    }
+        .menu_bar span {
+            float: right;
+            font-size: 40px;
+        }
 
     .MenuO {
         float: left;
+    }
+
+    section #contenedor {
+        margin-top: 55px;
     }
 }

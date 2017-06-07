@@ -25,6 +25,10 @@ namespace Translanza.Controllers
             return View();
         }
 
+        public ActionResult Login()
+        {
+            return View();
+        }
 
         public JsonResult InicioSesion(string usuario, string contraseña)
         {
@@ -38,14 +42,14 @@ namespace Translanza.Controllers
             }
         }
 
-
+        [HttpPost]
         public void enviarCorreo()
         {
             MailMessage email = new MailMessage();
             email.To.Add(new MailAddress("sistemas@translanza.com"));
-            email.From = new MailAddress("Contactenos Pagina Web");
-            email.Subject = "";
-            email.Body = "";
+            email.From = new MailAddress(Request.Params["correo"]);
+            email.Subject = "Contactenos: " + Request.Params["asunto"];
+            email.Body = "<p>Remitente: " + Request.Params["nombre"] + "</p><p>" + Request.Params["mensaje"] + "</p>";
             email.IsBodyHtml = true;
             email.Priority = MailPriority.Normal;
 
@@ -57,6 +61,7 @@ namespace Translanza.Controllers
             smtp.Credentials = new NetworkCredential("sistemas@translanza.com", "translanza123");
 
             Utilidad.SendEmail(email, smtp);
+
         }
 
         private bool ValidateLogin(string username, string passwd)
@@ -67,6 +72,7 @@ namespace Translanza.Controllers
             {
                 //List<Usuario> d = db.Usuario.ToList();
                 usuarioLogeado = db.Usuario.FirstOrDefault(f => f.NombreUsuario == username && f.Contraseña == passwd);
+
             }
             catch (Exception e)
             {

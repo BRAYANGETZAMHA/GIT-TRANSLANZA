@@ -284,13 +284,13 @@ namespace Translanza.Controllers
             }
             else
             {
-                if (rutaIdentificacion != obj.Img_DocIdentidad)
+                if (!string.IsNullOrEmpty(rutaIdentificacion))
                 {
                     EliminarImagen(obj.Img_DocIdentidad, "Identificacion");
 
                     obj.Img_DocIdentidad = GuardarImagen(docidentificacion, "Identificacion");
                 }
-                if (rutaLicencia != obj.Img_LicenciaConduccion)
+                if (!string.IsNullOrEmpty(rutaLicencia))
                 {
                     EliminarImagen(obj.Img_LicenciaConduccion, "Licencia");
 

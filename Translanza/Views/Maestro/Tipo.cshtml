@@ -11,7 +11,7 @@
 
 <section class="content">
 
-    <div class="col-xs-12">
+    <div id="contenedor" class="col-xs-12">
 
         <a href="@Url.Action("VistaTipo", "Maestro")"><i class="glyphicon glyphicon-chevron-left"></i>Volver a lista</a>
 
@@ -19,7 +19,7 @@
 
         <div class="panel panel-success">
             <div class="panel-heading">Tipo</div>
-            
+
             <div class="panel-body">
 
                 <form class="form-horizontal form-label-left" id="formTipo" novalidate>
@@ -37,16 +37,16 @@
                                 <option value="" disabled selected>Seleccione una opcion</option>
 
                                 @foreach (Agrupacion item in ViewBag.listaAgrupacion)
+                                {
+                                    if (Model.RowID > 0 && item.RowID == Model.AgrupacionID)
                                     {
-                                        if (Model.RowID > 0 && item.RowID == Model.AgrupacionID)
-                                        {
-                                    <option value="@item.RowID" selected>@item.Nombre</option>
-                                        }
-                                        else
-                                        {
-                                    <option value="@item.RowID">@item.Nombre</option>
-                                        }
+                                        <option value="@item.RowID" selected>@item.Nombre</option>
                                     }
+                                    else
+                                    {
+                                        <option value="@item.RowID">@item.Nombre</option>
+                                    }
+                                }
                             </select>
                         </div>
                     </div>
@@ -104,6 +104,7 @@
             </div>
         </div>
     </div>
+
 </section>
 
 <script>

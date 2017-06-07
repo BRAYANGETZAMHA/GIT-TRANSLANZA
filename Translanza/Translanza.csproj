@@ -379,6 +379,7 @@
     <Content Include="Content_Admin\DataTable\images\Sorting icons.psd" />
     <None Include="Properties\PublishProfiles\Translanza.pubxml" />
     <Content Include="Views\Inicio\Diseño_Administrativo.cshtml" />
+    <Content Include="Views\Inicio\Login.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

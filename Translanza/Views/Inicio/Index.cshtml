@@ -43,13 +43,6 @@
     <link href='http://fonts.googleapis.com/css?family=Varela' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
     @*jquery*@
     <script type="text/javascript" src="~/Content_Admin/bootstrap/js/jquery.min.js"></script>
     <!-- initialize jQuery Library -->
@@ -57,7 +50,8 @@
     <!-- For smooth animatin  -->
     <script src="~/Content/js/wow.min.js"></script>
     <!-- Bootstrap js -->
-    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content_Admin/bootstrap/js/bootstrap.min.js"></script>
+    @*<script src="~/Content/js/bootstrap.min.js"></script>*@
     <!-- superslides slider -->
     <script src="~/Content/js/jquery.superslides.min.js" type="text/javascript"></script>
     <!-- slick slider -->
@@ -71,6 +65,9 @@
 
     @*Validacion Campos*@
     <script src="~/Content_Admin/jquery.validate.min.js"></script>
+    @*sweetalert2*@
+    <script src="~/Content_Admin/SweetAlert2/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="~/Content_Admin/SweetAlert2/sweetalert2.min.css">
 
     <!-- Custom js-->
     <script src="~/Content/js/custom.js"></script>
@@ -111,6 +108,7 @@
     <div id="preloader">
         <div id="status">&nbsp;</div>
     </div>
+    <div id="Dialog"></div>
     <!-- END PRELOADER -->
     <!-- SCROLL TOP BUTTON -->
     <a class="scrollToTop" href="#"><i class="fa fa-angle-up"></i></a>
@@ -147,7 +145,7 @@
                             @*<li><a href="#afiliacion">Afiliarse</a></li>*@
 
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b>Login</b> <span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="Login"><b>Login</b> <span class="caret"></span></a>
                                 <ul id="login-dp" class="dropdown-menu">
                                     <li>
                                         <div class="row">
@@ -238,7 +236,7 @@
                         <div class="slider_overlay"></div>
                         <img src="~/Content/img/Slides/slide_6.jpg" alt="img">
                         <div class="slider_caption">
-                            <br /><br />    
+                            <br /><br />
                             <h2>Translanza, Transportamos con responsabilidad</h2>
                         </div>
                     </li>
@@ -303,12 +301,12 @@
                                 <div class="col-md-6">
 
                                     <img src="~/Content/img/imagen nosotros.jpg" alt="img">
-                                        
+
                                 </div>
 
                             </div>
 
-                            
+
                         </div>
                     </div>
                 </div>
@@ -586,11 +584,11 @@
                             <!-- FOR CONTACT FORM MESSAGE -->
                             <div id="form-messages"></div>
 
-                            <form id="formulario"> 
-                                <input name="nombre" class="form-control" type="text" placeholder="Nombre">
-                                <input name="correo" class="form-control" type="email" placeholder="Correo">
-                                <input name="asunto" class="form-control" type="text" placeholder="Asunto ">
-                                <textarea name="mensaje" class="form-control" cols="30" rows="10" placeholder="Mensaje"></textarea>
+                            <form id="formulario">
+                                <input id="nombre" name="nombre" class="form-control" type="text" placeholder="Nombre" required>
+                                <input id="correo" name="correo" class="form-control" type="email" placeholder="Correo" required>
+                                <input id="asunto" name="asunto" class="form-control" type="text" placeholder="Asunto " required>
+                                <textarea id="mensaje" name="mensaje" class="form-control" cols="30" rows="10" placeholder="Mensaje" required></textarea>
                                 </br>
                                 <button type="button" onclick="myfunction()" class="btn btn-success">Enviar</button>
                             </form>
@@ -615,7 +613,7 @@
                                 <i class="fa fa-phone"></i>
                                 <h4>Llámanos</h4>
                                 <p>310 680 63 63 - (O31)2483826</p>
-                                
+
                             </div>
                         </div>
                         <!-- BEGAIN CALL US FEATURE -->
@@ -681,27 +679,44 @@
 
     function myfunction() {
 
-        var validator = $("#formObservacion").validate();
+        debugger
+
+        var validator = $("#formulario").validate();
         if (!validator.form()) {
             return;
         }
 
-        var formData = new FormData(document.getElementById("formObservacion"));
+        var formData = new FormData(document.getElementById("formulario"));
 
         debugger
         $.ajax({
             url: "inicio/enviarCorreo",
             data: formData,
-            success: function () {
+            type: "post",
+            contentType: false,
+            processData: false,
+            success: function (data) {
+                AlertaConfirmacion("Envio Exitoso", "", "success");
+                $("#nombre").val("");
+                $("#correo").val("");
+                $("#asunto").val("");
+                $("#mensaje").val("");
 
             },
             error: function (error) {
-
+                AlertaConfirmacion("Envio Incorrecto", "", "error");
             }
         })
     }
 
     $(document).ready(function () {
+
+        if ($('.navbar-toggle').is(":visible")) {
+            $("#Login").attr("onclick", "ModalLogin()");
+        } else {
+            $("#Login").removeAttr("onclick", "ModalLogin()");
+        }
+
 
         $("#elastic_grid_demo").elastic_grid({
             'hoverDirection': true,
@@ -710,43 +725,68 @@
             'expandingSpeed': 500,
             'expandingHeight': 500,
             'items':
-                [
-                    {
-                        'title': 'Empresarial',
-                        'description': 'Prestamos un completo servicio a empresas públicas y privadas con calidad y responsabilidad en el transporte de empresarios, ejecutivos y empleados, garantizando su desplazamiento y de sus elementos de trabajo en el tipo de vehículo que se ajuste a sus necesidades; contribuyendo así a fortalecer su productividad, seguridad y comodidad.',
-                        'thumbnail': ['../Content/img/Servicios/Pequeño/empresarial1.png', '../Content/img/Servicios/Pequeño/empresarial2.png', '../Content/img/Servicios/Pequeño/empresarial3.png', '../Content/img/Servicios/Pequeño/empresarial4.png'],
-                        'large': ['../Content/img/Servicios/Grande/empresarial1.png', '../Content/img/Servicios/Grande/empresarial2.png', '../Content/img/Servicios/Grande/empresarial3.png', '../Content/img/Servicios/Grande/empresarial4.png'],
-                        'button_list': [],
-                        'tags': ['Photoshop']
-                    },
+            [
+                {
+                    'title': 'Empresarial',
+                    'description': 'Prestamos un completo servicio a empresas públicas y privadas con calidad y responsabilidad en el transporte de empresarios, ejecutivos y empleados, garantizando su desplazamiento y de sus elementos de trabajo en el tipo de vehículo que se ajuste a sus necesidades; contribuyendo así a fortalecer su productividad, seguridad y comodidad.',
+                    'thumbnail': ['../Content/img/Servicios/Pequeño/empresarial1.png', '../Content/img/Servicios/Pequeño/empresarial2.png', '../Content/img/Servicios/Pequeño/empresarial3.png', '../Content/img/Servicios/Pequeño/empresarial4.png'],
+                    'large': ['../Content/img/Servicios/Grande/empresarial1.png', '../Content/img/Servicios/Grande/empresarial2.png', '../Content/img/Servicios/Grande/empresarial3.png', '../Content/img/Servicios/Grande/empresarial4.png'],
+                    'button_list': [],
+                    'tags': ['Photoshop']
+                },
 
-                    {
-                        'title': 'Turistico',
-                        'description': 'Prestamos un servicio de transporte exclusivo para agencias de viajes, operadores turísticos y grupos familiares que deseen viajar a cualquier lugar del territorio nacional de manera cómoda y confiable.',
-                        'thumbnail': ['../Content/img/Servicios/Pequeño/turistico1.png', '../Content/img/Servicios/Pequeño/turistico2.png', '../Content/img/Servicios/Pequeño/turistico3.png', '../Content/img/Servicios/Pequeño/turistico4.png'],
-                        'large': ['../Content/img/Servicios/Grande/turistico1.png', '../Content/img/Servicios/Grande/turistico2.png', '../Content/img/Servicios/Grande/turistico3.png', '../Content/img/Servicios/Grande/turistico4.png'],
-                        'button_list': [],
-                        'tags': ['Photoshop']
-                    },
+                {
+                    'title': 'Turistico',
+                    'description': 'Prestamos un servicio de transporte exclusivo para agencias de viajes, operadores turísticos y grupos familiares que deseen viajar a cualquier lugar del territorio nacional de manera cómoda y confiable.',
+                    'thumbnail': ['../Content/img/Servicios/Pequeño/turistico1.png', '../Content/img/Servicios/Pequeño/turistico2.png', '../Content/img/Servicios/Pequeño/turistico3.png', '../Content/img/Servicios/Pequeño/turistico4.png'],
+                    'large': ['../Content/img/Servicios/Grande/turistico1.png', '../Content/img/Servicios/Grande/turistico2.png', '../Content/img/Servicios/Grande/turistico3.png', '../Content/img/Servicios/Grande/turistico4.png'],
+                    'button_list': [],
+                    'tags': ['Photoshop']
+                },
 
-                    {
-                        'title': 'Escolar',
-                        'description': 'Brindamos servicio de transporte escolar dando cabal cumplimiento a todas las normas legales vigentes, así como las revisiones técnico mecánicas de nuestro parque automotor y la selección de personal idóneo con el objetivo principal de brindar seguridad a los estudiantes. Contamos co microbuses y buses para transportar con responsabilidad a estudiantes en colegios y universidades, garantizando la puntualidad en los recorridos.',
-                        'thumbnail': ['../Content/img/Servicios/Pequeño/escolar1.png', '../Content/img/Servicios/Pequeño/escolar2.png', '../Content/img/Servicios/Pequeño/escolar3.png'],
-                        'large': ['../Content/img/Servicios/Grande/escolar1.png', '../Content/img/Servicios/Grande/escolar2.png', '../Content/img/Servicios/Grande/escolar3.png'],
-                        'button_list': [],
-                        'tags': ['Photoshop']
-                    },
+                {
+                    'title': 'Escolar',
+                    'description': 'Brindamos servicio de transporte escolar dando cabal cumplimiento a todas las normas legales vigentes, así como las revisiones técnico mecánicas de nuestro parque automotor y la selección de personal idóneo con el objetivo principal de brindar seguridad a los estudiantes. Contamos co microbuses y buses para transportar con responsabilidad a estudiantes en colegios y universidades, garantizando la puntualidad en los recorridos.',
+                    'thumbnail': ['../Content/img/Servicios/Pequeño/escolar1.png', '../Content/img/Servicios/Pequeño/escolar2.png', '../Content/img/Servicios/Pequeño/escolar3.png'],
+                    'large': ['../Content/img/Servicios/Grande/escolar1.png', '../Content/img/Servicios/Grande/escolar2.png', '../Content/img/Servicios/Grande/escolar3.png'],
+                    'button_list': [],
+                    'tags': ['Photoshop']
+                },
 
-                    {
-                        'title': 'Mantenimiento',
-                        'description': 'Contamos con un completo equipo humano y tecnológico al servicio de nuestro parque automotor, garantizando la disponibilidad de estos, ofreciendo mantenimiento a nuestros vehículos, afiliados y contratados.',
-                        'thumbnail': ['../Content/img/Servicios/Pequeño/mantenimiento1.png', '../Content/img/Servicios/Pequeño/mantenimiento2.png', '../Content/img/Servicios/Pequeño/mantenimiento3.png'],
-                        'large': ['../Content/img/Servicios/Grande/mantenimiento1.png', '../Content/img/Servicios/Grande/mantenimiento2.png', '../Content/img/Servicios/Grande/mantenimiento3.png'],
-                        'button_list': [],
-                        'tags': ['Photoshop']
-                    },
-                ]
+                {
+                    'title': 'Mantenimiento',
+                    'description': 'Contamos con un completo equipo humano y tecnológico al servicio de nuestro parque automotor, garantizando la disponibilidad de estos, ofreciendo mantenimiento a nuestros vehículos, afiliados y contratados.',
+                    'thumbnail': ['../Content/img/Servicios/Pequeño/mantenimiento1.png', '../Content/img/Servicios/Pequeño/mantenimiento2.png', '../Content/img/Servicios/Pequeño/mantenimiento3.png'],
+                    'large': ['../Content/img/Servicios/Grande/mantenimiento1.png', '../Content/img/Servicios/Grande/mantenimiento2.png', '../Content/img/Servicios/Grande/mantenimiento3.png'],
+                    'button_list': [],
+                    'tags': ['Photoshop']
+                },
+            ]
         })
     });
+
+    function ModalLogin() {
+        var urlWithCont = '../Inicio/Login';
+        $("#Dialog")
+            .load(urlWithCont.trim());
+
+    }
+
+    function AlertaConfirmacion(encabezado, mensaje, tipo) {
+        swal({
+            title: encabezado,
+            text: mensaje,
+            type: tipo,
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '',
+            confirmButtonText: 'OK',
+            cancelButtonText: '',
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: '',
+            buttonsStyling: false
+        }).then(function () {})
+    }
+
+    $.validator.messages.required = 'Campo requerido';
 </script>
