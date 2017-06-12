@@ -7,7 +7,7 @@
     <!DOCTYPE html>
     <html>
     <head>
-        <title></title>
+        <title>Translanza</title>
 
         <link rel="stylesheet" type="text/css" href="~/Content_Admin/estilo.css">
         <link rel="stylesheet" type="text/css" href="~/Content_Admin/bootstrap/css/bootstrap.min.css">
@@ -17,14 +17,14 @@
         <link href="~/Content_Admin/DataTable/jquery.dataTables.css" rel="stylesheet" />
         <script src="~/Content_Admin/DataTable/jquery.dataTables.js"></script>
         <!-- Select2 -->
-        <link rel="stylesheet" href="~/Content_Admin/select2/select2.css">
-        <script src="~/Content_Admin/select2/select2.min.js"></script>
+        <link rel="stylesheet" href="~/Content_Admin/Select2/select2.min.css">
+        <script src="~/Content_Admin/Select2/select2.min.js"></script>
+        <script src="~/Content_Admin/Select2/select2.full.min.js"></script>
         @*sweetalert2*@
         <script src="~/Content_Admin/SweetAlert2/sweetalert2.min.js"></script>
         <link rel="stylesheet" href="~/Content_Admin/SweetAlert2/sweetalert2.min.css">
 
         <script src="~/Content_Admin/jquery.validate.min.js"></script>
-
 
 
     </head>
@@ -115,11 +115,7 @@
     $.validator.messages.email = 'Email inválido';
 
     function ModalImagen(ruta) {
-        var urlWithCont = '../Operacion/modalImagen?ruta=' + ruta;
-        $("#Dialog")
-            .load(urlWithCont.trim())
-            .dialog('open');
+        $("#Dialog").load('../Operacion/modalImagen?ruta=' + ruta).dialog('open');
     }
-
 </script>
 }

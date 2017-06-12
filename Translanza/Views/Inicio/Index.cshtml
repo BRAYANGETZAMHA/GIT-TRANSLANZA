@@ -700,7 +700,7 @@
                 $("#nombre").val("");
                 $("#correo").val("");
                 $("#asunto").val("");
-                $("#mensaje").empty();
+                $("#mensaje").empty();  
 
             },
             error: function (error) {
@@ -766,10 +766,7 @@
     });
 
     function ModalLogin() {
-        var urlWithCont = '../Inicio/Login';
-        $("#Dialog")
-            .load(urlWithCont.trim());
-
+        $("#Dialog").load('../Inicio/Login');
     }
 
     function AlertaConfirmacion(encabezado, mensaje, tipo) {

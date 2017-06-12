@@ -9,6 +9,10 @@
 
     <div class="col-xs-12">
 
+        <a href="@Url.Action("VistaUsuario", "Perfil")"><i class="glyphicon glyphicon-chevron-left"></i>Volver a lista</a>
+
+        <br /><br />
+
         <div class="panel panel-success">
             <div class="panel-heading">Usuario</div>
             <div class="panel-body">
@@ -35,21 +39,19 @@
                         </div>
                     </div>
 
-                    @if (Model.RowID == 0)
-                    {
-                        <div class="row form-group">
-                            <div class="col-md-2">
-                                <label>Tipo:</label>
-                            </div>
-                            <div class="col-md-4">
-                                <select name="tipo" style="width:100%" id="tipo" class="select2" required>
-                                    <option value="" disabled selected>Seleccione una opcion</option>
-                                    <option value="empleado">Empleado</option>
-                                    <option value="afiliado">Afiliado</option>
-                                </select>
-                            </div>
+                    <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Tipo:</label>
                         </div>
-                    }
+                        <div class="col-md-4">
+                            <select name="tipo" style="width:100%" id="tipo" class="select2" required>
+                                <option value="" disabled selected>Seleccione una opcion</option>
+                                <option value="empleado">Empleado</option>
+                                <option value="afiliado">Afiliado</option>
+                            </select>
+                        </div>
+                    </div>
+
 
                     @*@if (Model.EmpleadoID > 0)
                         {*@
@@ -130,6 +132,20 @@
                     </div>
 
                     <div class="row form-group">
+                        <div class="col-md-2">
+                            <label>Estado:</label>
+                        </div>
+                        <div class="col-md-4 btn-group" data-toggle="buttons">
+                            <label class="btn btn-default" id="lblinactivo">
+                                <input type="radio" name="inactivo" id="inactivo">Inactivo
+                            </label>
+                            <label class="btn btn-default" id="lblactivo">
+                                <input type="radio" name="activo" id="activo">Activo
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
                         <div class="col-md-6 ">
                             @*<button type="submit" class="btn btn-primary">Cancel</button>*@
                             <button id="send" type="button" onclick="Guardar()" class="btn btn-success">Guardar</button>
@@ -144,10 +160,22 @@
 
 <script>
 
-    if (@Model.RowID > 0) {
+    if (@Model.RowID>0) {
 
-
-
+        if ("@Model.Activo"=="True") {
+            $('#activo').attr('checked',true);
+            $('#lblactivo').addClass("btn-primary");
+        }
+        else{
+            $('#inactivo').attr('checked',true);
+            $('#lblinactivo').addClass("btn-primary");
+        }
+    }
+    else
+    {
+        //Deja por defecto activo
+        $('#activo').attr('checked', true);
+        $('#lblactivo').addClass("btn-primary");
     }
 
     if ("@Model.EmpleadoID" != "")
@@ -165,6 +193,20 @@
 
         $(".select2").select2();
 
+        $('#lblactivo').click(function () {
+            $('#activo').attr('checked', true);
+            $('#inactivo').attr('checked', false);
+            $('#lblactivo').addClass("btn-primary");
+            $('#lblinactivo').removeClass("btn-primary");
+        });
+
+        $('#lblinactivo').click(function () {
+            $('#activo').attr('checked', false);
+            $('#inactivo').attr('checked', true);
+            $('#lblactivo').removeClass("btn-primary");
+            $('#lblinactivo').addClass("btn-primary");
+        });
+
         $("#tipo").change(function () {
 
             if ($('#tipo').val() == "empleado") {
@@ -176,23 +218,18 @@
                 $("#listaEmpleado").hide();
                 $("#listaAfiliado").show();
             }
-            $('.select2').css('width','100%')
+
+            $('.select2').css('width', '100%')
+
         });
 
     })
 
     function Guardar() {
-        @*if (@Model.RowID > 0) {
 
-            if($('#input_Licencia').val() != "")
-            {
-
-            }
-
-            $('#input_Licencia').removeAttr("required");
-            $('#input_Identificacion').removeAttr("required");
-
-        }*@
+        if (@Model.RowID > 0) {
+            $('#contraseña').removeAttr("required");
+        }
 
         var validator = $("#formUsuario").validate();
         if (!validator.form()) {

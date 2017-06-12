@@ -53,10 +53,6 @@ section {
     padding: 2px;
 }
 
-/*.panel-heading {
-    	padding:10px 15px;
-
-}*/
 
 @media screen and (max-width:800px ) {
 
@@ -121,8 +117,5 @@ section {
         margin-top: 55px;
     }
     
-    /*section #contenedor {
-        margin-top: 55px;
-    }*/
-
+    
 }

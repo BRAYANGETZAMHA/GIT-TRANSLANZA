@@ -137,7 +137,6 @@ namespace Translanza.Controllers
             }
 
             obj.NombreUsuario = nombreusuario;
-            obj.Contraseña = contraseña;
 
             if (empleado > 0)
             {

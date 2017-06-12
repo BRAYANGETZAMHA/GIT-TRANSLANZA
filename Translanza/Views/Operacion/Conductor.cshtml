@@ -85,7 +85,7 @@
                             <label>Especialidad:</label>
                         </div>
                         <div class="col-md-4">
-                            <select name="especialidad" style="width:100%" data-placeholder="Seleccione una opcion" multiple="multiple" required>
+                            <select id="especialidad" name="especialidad" style="width:100%" data-placeholder="Seleccione una opcion" multiple="multiple" required>
 
                                 @foreach (Tipo item in ViewBag.listaTipoEspecialidad)
                                 {
@@ -111,7 +111,7 @@
                         </div>
                         <div class="thumbnail col-md-3" style="border:none;">
                             <img class="preview_Identificacion" src="@Model.Img_DocIdentidad" width="100%" height="100%">
-                            <input type="hidden" id="archivoRutaIdentificacion" name="archivoRutaIdentificacion"/>
+                            <input type="hidden" id="archivoRutaIdentificacion" name="archivoRutaIdentificacion" />
                         </div>
                     </div>
                     <div class="row form-group">
@@ -120,7 +120,7 @@
                         </div>
                         <div class="col-md-4">
                             <input type="file" id="input_Licencia" name="input_Licencia" class="form-control img_Licencia" value="@Model.Img_LicenciaConduccion" required accept="image/*">
-                            <input type="hidden" id="archivoRutaLicencia" name="archivoRutaLicencia"/>
+                            <input type="hidden" id="archivoRutaLicencia" name="archivoRutaLicencia" />
                         </div>
                         <div class="thumbnail col-md-3" style="border:none;">
                             <img class="preview_Licencia" src="@Model.Img_LicenciaConduccion" width="100%" height="100%">
@@ -201,13 +201,13 @@
                                     </thead>
                                     <tbody>
                                         @foreach (Translanza.Models.ObservacionConductor item in ViewBag.listaObservacion)
-                                            {
-                                            <tr>
-                                                <td>@item.Descripcion</td>
-                                                <td>@item.UsuarioCreacion</td>
-                                                <td>@item.FechaCreacion</td>
-                                            </tr>
-                                            }
+                                        {
+                                        <tr>
+                                            <td>@item.Descripcion</td>
+                                            <td>@item.UsuarioCreacion</td>
+                                            <td>@item.FechaCreacion</td>
+                                        </tr>
+                                        }
                                     </tbody>
                                 </table>
                             </div>
@@ -221,43 +221,25 @@
 
 <script>
 
-    if (@Model.RowID>0) {
-        debugger
-
-        if("@Model.Calificacion"!="0")
-        {
-            var s = "@Model.Calificacion";
-            $('#p'+s).attr('checked',true);
-        }
-
-        if ("@Model.Activo"=="True") {
-            $('#activo').attr('checked',true);
-            $('#lblactivo').addClass("btn-primary");
-        }
-        else{
-            $('#inactivo').attr('checked',true);
-            $('#lblinactivo').addClass("btn-primary");
-    }
-
     $(document).ready(function () {
 
         $('#calificacion').rating();
 
-        $("select2").select2();
+        $("#especialidad").select2();
 
-        $('#lblactivo').click(function(){
-            $('#activo').attr('checked',true);
-            $('#inactivo').attr('checked',false);
+        $('#lblactivo').click(function () {
+            $('#activo').attr('checked', true);
+            $('#inactivo').attr('checked', false);
             $('#lblactivo').addClass("btn-primary");
             $('#lblinactivo').removeClass("btn-primary");
-        })
+        });
 
-        $('#lblinactivo').click(function(){
-            $('#activo').attr('checked',false);
-            $('#inactivo').attr('checked',true);
+        $('#lblinactivo').click(function () {
+            $('#activo').attr('checked', false);
+            $('#inactivo').attr('checked', true);
             $('#lblactivo').removeClass("btn-primary");
             $('#lblinactivo').addClass("btn-primary");
-        })
+        });
 
         $("#input_Identificacion").change(function () {
             var preview = document.querySelector('.preview_Identificacion');
@@ -283,39 +265,67 @@
             }
             if (file) {
                 reader.readAsDataURL(file);
-            } else {}
+            } else { }
         });
     })
 
+</script>
 
-    function Guardar()
+<script>
+
+    if (@Model.RowID>0) {
+
+        if ("@Model.Calificacion" != "0") {
+            var s = "@Model.Calificacion";
+            $('#p' + s).attr('checked', true);
+        }
+
+        if ("@Model.Activo"=="True") {
+            $('#activo').attr('checked',true);
+            $('#lblactivo').addClass("btn-primary");
+        }
+        else{
+            $('#inactivo').attr('checked',true);
+            $('#lblinactivo').addClass("btn-primary");
+        }
+    }
+    else
     {
+        //Deja por defecto activo
+        $('#activo').attr('checked', true);
+        $('#lblactivo').addClass("btn-primary");
+    }
+
+
+    function Guardar() {
+        debugger
         if (@Model.RowID > 0) {
             $('#input_Licencia').removeAttr("required");
             $('#input_Identificacion').removeAttr("required");
-
         }
+
         var validator = $("#formConductor").validate();
-        if(!validator.form())
+
+        if (!validator.form())
         {
             return;
         }
 
         var formData = new FormData(document.getElementById("formConductor"));
         $.ajax({
-            type:"post",
+            type: "post",
             url: "GuardarConductor",
             contentType: false,
             processData: false,
-            data:formData,
+            data: formData,
             success: function (data) {
                 $('#rowid').val(data);
-                AlertaConfirmacion("Almacenamiento Exitoso","","success","../Operacion/Conductor?rowid="+data);
+                AlertaConfirmacion("Almacenamiento Exitoso", "", "success", "../Operacion/Conductor?rowid=" + data);
             },
             error: function (error) {
-                AlertaConfirmacion("Almacenamiento Incorrecto","","error","");
+                AlertaConfirmacion("Almacenamiento Incorrecto", "", "error", "");
             }
-        })
+        });
     }
 
     function GuardarObservacion()
@@ -328,25 +338,19 @@
 
         var formData = new FormData(document.getElementById("formObservacion"));
         $.ajax({
-            type:"post",
+            type: "post",
             url: "GuardarObservacionConductor",
             contentType: false,
             processData: false,
-            data:formData,
+            data: formData,
             success: function (data) {
                 $('#rowid').val(data);
-                AlertaConfirmacion("Almacenamiento Exitoso","","success","../Operacion/Conductor?rowid="+data);
+                AlertaConfirmacion("Almacenamiento Exitoso", "", "success", "../Operacion/Conductor?rowid=" + data);
             },
             error: function (error) {
-                AlertaConfirmacion("Almacenamiento Incorrecto","","error","");
+                AlertaConfirmacion("Almacenamiento Incorrecto", "", "error", "");
             }
-        })
+        });
     }
 
-    function ModalImagen(ruta){
-        var urlWithCont = '../Operacion/modalImagen?ruta='+ruta;
-        $("#Dialog")
-        .load(urlWithCont.trim())
-        .dialog('open');
-    }
 </script>

@@ -242,11 +242,9 @@
     <Content Include="Content_Admin\jquery.validate.min.js" />
     <Content Include="Content_Admin\mask\jquery.mask.js" />
     <Content Include="Content_Admin\mask\jquery.mask.min.js" />
-    <Content Include="Content_Admin\select2\select2-spinner.gif" />
-    <Content Include="Content_Admin\select2\select2.css" />
-    <Content Include="Content_Admin\select2\select2.js" />
-    <Content Include="Content_Admin\select2\select2.min.js" />
-    <Content Include="Content_Admin\select2\select2.png" />
+    <Content Include="Content_Admin\Select2\select2.full.min.js" />
+    <Content Include="Content_Admin\Select2\select2.min.css" />
+    <Content Include="Content_Admin\Select2\select2.min.js" />
     <Content Include="Content_Admin\SweetAlert2\sweetalert2.css" />
     <Content Include="Content_Admin\SweetAlert2\sweetalert2.js" />
     <Content Include="Content_Admin\SweetAlert2\sweetalert2.min.css" />
