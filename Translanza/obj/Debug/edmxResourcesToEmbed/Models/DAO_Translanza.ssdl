@@ -30,79 +30,37 @@
     <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaActualizacion" Type="date" />
   </EntityType>
-  <EntityType Name="Afiliado">
+  <EntityType Name="AfiliadoConductor">
     <Key>
       <PropertyRef Name="RowID" />
     </Key>
     <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Identificacion" Type="int" />
-    <Property Name="Nombre" Type="varchar" MaxLength="50" />
-    <Property Name="Apellido" Type="varchar" MaxLength="50" />
-    <Property Name="Telefono" Type="varchar" MaxLength="50" />
-    <Property Name="Celular" Type="varchar" MaxLength="50" />
-    <Property Name="Direccion" Type="varchar" MaxLength="50" />
-    <Property Name="Correo" Type="varchar" MaxLength="50" />
-    <Property Name="Img_DocIdentidad" Type="varchar" MaxLength="100" />
+    <Property Name="AfiliadoID" Type="int" Nullable="false" />
+    <Property Name="ConductorID" Type="int" Nullable="false" />
     <Property Name="Activo" Type="bit" />
     <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaCreacion" Type="date" />
     <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaActualizacion" Type="date" />
   </EntityType>
-  <EntityType Name="Conductor">
+  <EntityType Name="EspecialidadConductor">
     <Key>
       <PropertyRef Name="RowID" />
     </Key>
     <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="AfiliadoID" Type="int" />
-    <Property Name="Identificacion" Type="int" />
-    <Property Name="Nombre" Type="varchar" MaxLength="50" />
-    <Property Name="Apellido" Type="varchar" MaxLength="50" />
-    <Property Name="Telefono" Type="varchar" MaxLength="50" />
-    <Property Name="Celular" Type="varchar" MaxLength="50" />
-    <Property Name="Direccion" Type="varchar" MaxLength="50" />
-    <Property Name="Correo" Type="varchar" MaxLength="50" />
-    <Property Name="Img_DocIdentidad" Type="varchar" MaxLength="100" />
-    <Property Name="Img_LicenciaConduccion" Type="varchar" MaxLength="100" />
-    <Property Name="Calificacion" Type="int" />
+    <Property Name="TipoID" Type="int" Nullable="false" />
     <Property Name="Activo" Type="bit" />
     <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaCreacion" Type="date" />
     <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaActualizacion" Type="date" />
-  </EntityType>
-  <EntityType Name="Empleado">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Identificacion" Type="int" />
-    <Property Name="Nombre" Type="varchar" MaxLength="50" />
-    <Property Name="Apellido" Type="varchar" MaxLength="50" />
-    <Property Name="Telefono" Type="varchar" MaxLength="50" />
-    <Property Name="Celular" Type="varchar" MaxLength="50" />
-    <Property Name="Direccion" Type="varchar" MaxLength="50" />
-    <Property Name="Correo" Type="varchar" MaxLength="50" />
-    <Property Name="Activo" Type="bit" />
-    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaCreacion" Type="date" />
-    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaActualizacion" Type="date" />
-  </EntityType>
-  <EntityType Name="Especialidad">
-    <Key>
-      <PropertyRef Name="RowID" />
-    </Key>
-    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ConductorID" Type="int" />
-    <Property Name="TipoID" Type="int" />
   </EntityType>
   <EntityType Name="ObservacionConductor">
     <Key>
       <PropertyRef Name="RowID" />
     </Key>
     <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="ConductorID" Type="int" />
+    <Property Name="TerceroID" Type="int" />
     <Property Name="Descripcion" Type="varchar" MaxLength="200" />
     <Property Name="Activo" Type="bit" />
     <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
@@ -119,6 +77,28 @@
     <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaCreacion" Type="date" />
   </EntityType>
+  <EntityType Name="Tercero">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Identificacion" Type="int" />
+    <Property Name="Nombre" Type="varchar" MaxLength="50" />
+    <Property Name="Apellido" Type="varchar" MaxLength="50" />
+    <Property Name="Telefono" Type="varchar" MaxLength="50" />
+    <Property Name="Celular" Type="varchar" MaxLength="50" />
+    <Property Name="Direccion" Type="varchar" MaxLength="50" />
+    <Property Name="Correo" Type="varchar" MaxLength="50" />
+    <Property Name="Img_DocIdentidad" Type="varchar" MaxLength="100" />
+    <Property Name="Img_LicenciaConduccion" Type="varchar" MaxLength="100" />
+    <Property Name="Calificacion" Type="int" />
+    <Property Name="Tipo" Type="int" Nullable="false" />
+    <Property Name="Activo" Type="bit" />
+    <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
+    <Property Name="FechaCreacion" Type="date" />
+    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="50" />
+    <Property Name="FechaActualizacion" Type="date" />
+  </EntityType>
   <EntityType Name="Vehiculo">
     <Key>
       <PropertyRef Name="RowID" />
@@ -131,7 +111,7 @@
     <Property Name="TipoID" Type="int" />
     <Property Name="NoPasajeros" Type="int" />
     <Property Name="CombustibleID" Type="int" />
-    <Property Name="AfiliadoID" Type="int" />
+    <Property Name="TerceroID" Type="int" />
     <Property Name="Img_TarjetaOperacion" Type="varchar" MaxLength="100" />
     <Property Name="Vencimiento_Tecnomecanica" Type="date" />
     <Property Name="Img_Tecnomecanica" Type="varchar" MaxLength="100" />
@@ -196,10 +176,9 @@
       <PropertyRef Name="RowID" />
     </Key>
     <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="NombreUsuario" Type="varchar" MaxLength="50" />
-    <Property Name="Contraseña" Type="varchar" MaxLength="50" />
-    <Property Name="EmpleadoID" Type="int" />
-    <Property Name="AfiliadoID" Type="int" />
+    <Property Name="NombreUsuario" Type="varchar" MaxLength="30" />
+    <Property Name="Contraseña" Type="varchar" MaxLength="30" />
+    <Property Name="TerceroID" Type="int" />
     <Property Name="RolID" Type="int" />
     <Property Name="Activo" Type="bit" />
     <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
@@ -207,55 +186,55 @@
     <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaActualizacion" Type="date" />
   </EntityType>
-  <Association Name="FK__Conductor__Afili__4CC05EF3">
-    <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="0..1" />
-    <End Role="Conductor" Type="Self.Conductor" Multiplicity="*" />
+  <Association Name="FK__AfiliadoC__Afili__2A363CC5">
+    <End Role="Tercero" Type="Self.Tercero" Multiplicity="1" />
+    <End Role="AfiliadoConductor" Type="Self.AfiliadoConductor" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Afiliado">
+      <Principal Role="Tercero">
         <PropertyRef Name="RowID" />
       </Principal>
-      <Dependent Role="Conductor">
+      <Dependent Role="AfiliadoConductor">
         <PropertyRef Name="AfiliadoID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Especiali__Condu__4F9CCB9E">
-    <End Role="Conductor" Type="Self.Conductor" Multiplicity="0..1" />
-    <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="*" />
+  <Association Name="FK__AfiliadoC__Condu__2B2A60FE">
+    <End Role="Tercero" Type="Self.Tercero" Multiplicity="1" />
+    <End Role="AfiliadoConductor" Type="Self.AfiliadoConductor" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Conductor">
+      <Principal Role="Tercero">
         <PropertyRef Name="RowID" />
       </Principal>
-      <Dependent Role="Especialidad">
+      <Dependent Role="AfiliadoConductor">
         <PropertyRef Name="ConductorID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Especiali__TipoI__5090EFD7">
-    <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
-    <End Role="Especialidad" Type="Self.Especialidad" Multiplicity="*" />
+  <Association Name="FK__Especiali__TipoI__3F3159AB">
+    <End Role="Tipo" Type="Self.Tipo" Multiplicity="1" />
+    <End Role="EspecialidadConductor" Type="Self.EspecialidadConductor" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Tipo">
         <PropertyRef Name="RowID" />
       </Principal>
-      <Dependent Role="Especialidad">
+      <Dependent Role="EspecialidadConductor">
         <PropertyRef Name="TipoID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Observaci__Condu__536D5C82">
-    <End Role="Conductor" Type="Self.Conductor" Multiplicity="0..1" />
+  <Association Name="FK__Observaci__Terce__190BB0C3">
+    <End Role="Tercero" Type="Self.Tercero" Multiplicity="0..1" />
     <End Role="ObservacionConductor" Type="Self.ObservacionConductor" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Conductor">
+      <Principal Role="Tercero">
         <PropertyRef Name="RowID" />
       </Principal>
       <Dependent Role="ObservacionConductor">
-        <PropertyRef Name="ConductorID" />
+        <PropertyRef Name="TerceroID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Observaci__Vehic__3D7E1B63">
+  <Association Name="FK__Observaci__Vehic__23893F36">
     <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="0..1" />
     <End Role="ObservacionVehiculo" Type="Self.ObservacionVehiculo" Multiplicity="*" />
     <ReferentialConstraint>
@@ -315,31 +294,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Usuario__Afiliad__2C88998B">
-    <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="0..1" />
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+  <Association Name="FK__Tercero__Tipo__5FD33367">
+    <End Role="Tipo" Type="Self.Tipo" Multiplicity="1" />
+    <End Role="Tercero" Type="Self.Tercero" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Afiliado">
+      <Principal Role="Tipo">
         <PropertyRef Name="RowID" />
       </Principal>
-      <Dependent Role="Usuario">
-        <PropertyRef Name="AfiliadoID" />
+      <Dependent Role="Tercero">
+        <PropertyRef Name="Tipo" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Usuario__Emplead__2B947552">
-    <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
-    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Empleado">
-        <PropertyRef Name="RowID" />
-      </Principal>
-      <Dependent Role="Usuario">
-        <PropertyRef Name="EmpleadoID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Usuario__RolID__2AA05119">
+  <Association Name="FK__Usuario__RolID__06ED0088">
     <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
     <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
     <ReferentialConstraint>
@@ -351,19 +318,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Vehiculo__Afilia__2022C2A6">
-    <End Role="Afiliado" Type="Self.Afiliado" Multiplicity="0..1" />
-    <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="*" />
+  <Association Name="FK__Usuario__Tercero__05F8DC4F">
+    <End Role="Tercero" Type="Self.Tercero" Multiplicity="0..1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Afiliado">
+      <Principal Role="Tercero">
         <PropertyRef Name="RowID" />
       </Principal>
-      <Dependent Role="Vehiculo">
-        <PropertyRef Name="AfiliadoID" />
+      <Dependent Role="Usuario">
+        <PropertyRef Name="TerceroID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Vehiculo__Combus__1E3A7A34">
+  <Association Name="FK__Vehiculo__Combus__1CDC41A7">
     <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
     <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="*" />
     <ReferentialConstraint>
@@ -375,7 +342,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Vehiculo__MarcaI__1F2E9E6D">
+  <Association Name="FK__Vehiculo__Combus__1DD065E0">
+    <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+    <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Vehiculo">
+        <PropertyRef Name="CombustibleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vehiculo__MarcaI__1EC48A19">
     <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
     <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="*" />
     <ReferentialConstraint>
@@ -387,7 +366,31 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Vehiculo__TipoID__2116E6DF">
+  <Association Name="FK__Vehiculo__MarcaI__1FB8AE52">
+    <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
+    <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tipo">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Vehiculo">
+        <PropertyRef Name="MarcaID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vehiculo__Tercer__1BE81D6E">
+    <End Role="Tercero" Type="Self.Tercero" Multiplicity="0..1" />
+    <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tercero">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="Vehiculo">
+        <PropertyRef Name="TerceroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Vehiculo__TipoID__20ACD28B">
     <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
     <End Role="Vehiculo" Type="Self.Vehiculo" Multiplicity="*" />
     <ReferentialConstraint>
@@ -426,34 +429,33 @@
   <EntityContainer Name="TranslanzaModelStoreContainer">
     <EntitySet Name="Agrupacion" EntityType="Self.Agrupacion" Schema="Maestro" store:Type="Tables" />
     <EntitySet Name="Tipo" EntityType="Self.Tipo" Schema="Maestro" store:Type="Tables" />
-    <EntitySet Name="Afiliado" EntityType="Self.Afiliado" Schema="Operacion" store:Type="Tables" />
-    <EntitySet Name="Conductor" EntityType="Self.Conductor" Schema="Operacion" store:Type="Tables" />
-    <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="Operacion" store:Type="Tables" />
-    <EntitySet Name="Especialidad" EntityType="Self.Especialidad" Schema="Operacion" store:Type="Tables" />
+    <EntitySet Name="AfiliadoConductor" EntityType="Self.AfiliadoConductor" Schema="Operacion" store:Type="Tables" />
+    <EntitySet Name="EspecialidadConductor" EntityType="Self.EspecialidadConductor" Schema="Operacion" store:Type="Tables" />
     <EntitySet Name="ObservacionConductor" EntityType="Self.ObservacionConductor" Schema="Operacion" store:Type="Tables" />
     <EntitySet Name="ObservacionVehiculo" EntityType="Self.ObservacionVehiculo" Schema="Operacion" store:Type="Tables" />
+    <EntitySet Name="Tercero" EntityType="Self.Tercero" Schema="Operacion" store:Type="Tables" />
     <EntitySet Name="Vehiculo" EntityType="Self.Vehiculo" Schema="Operacion" store:Type="Tables" />
     <EntitySet Name="Menu" EntityType="Self.Menu" Schema="Perfil" store:Type="Tables" />
     <EntitySet Name="Rol" EntityType="Self.Rol" Schema="Perfil" store:Type="Tables" />
     <EntitySet Name="RolMenu" EntityType="Self.RolMenu" Schema="Perfil" store:Type="Tables" />
     <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="Perfil" store:Type="Tables" />
-    <AssociationSet Name="FK__Conductor__Afili__4CC05EF3" Association="Self.FK__Conductor__Afili__4CC05EF3">
-      <End Role="Afiliado" EntitySet="Afiliado" />
-      <End Role="Conductor" EntitySet="Conductor" />
+    <AssociationSet Name="FK__AfiliadoC__Afili__2A363CC5" Association="Self.FK__AfiliadoC__Afili__2A363CC5">
+      <End Role="Tercero" EntitySet="Tercero" />
+      <End Role="AfiliadoConductor" EntitySet="AfiliadoConductor" />
     </AssociationSet>
-    <AssociationSet Name="FK__Especiali__Condu__4F9CCB9E" Association="Self.FK__Especiali__Condu__4F9CCB9E">
-      <End Role="Conductor" EntitySet="Conductor" />
-      <End Role="Especialidad" EntitySet="Especialidad" />
+    <AssociationSet Name="FK__AfiliadoC__Condu__2B2A60FE" Association="Self.FK__AfiliadoC__Condu__2B2A60FE">
+      <End Role="Tercero" EntitySet="Tercero" />
+      <End Role="AfiliadoConductor" EntitySet="AfiliadoConductor" />
     </AssociationSet>
-    <AssociationSet Name="FK__Especiali__TipoI__5090EFD7" Association="Self.FK__Especiali__TipoI__5090EFD7">
+    <AssociationSet Name="FK__Especiali__TipoI__3F3159AB" Association="Self.FK__Especiali__TipoI__3F3159AB">
       <End Role="Tipo" EntitySet="Tipo" />
-      <End Role="Especialidad" EntitySet="Especialidad" />
+      <End Role="EspecialidadConductor" EntitySet="EspecialidadConductor" />
     </AssociationSet>
-    <AssociationSet Name="FK__Observaci__Condu__536D5C82" Association="Self.FK__Observaci__Condu__536D5C82">
-      <End Role="Conductor" EntitySet="Conductor" />
+    <AssociationSet Name="FK__Observaci__Terce__190BB0C3" Association="Self.FK__Observaci__Terce__190BB0C3">
+      <End Role="Tercero" EntitySet="Tercero" />
       <End Role="ObservacionConductor" EntitySet="ObservacionConductor" />
     </AssociationSet>
-    <AssociationSet Name="FK__Observaci__Vehic__3D7E1B63" Association="Self.FK__Observaci__Vehic__3D7E1B63">
+    <AssociationSet Name="FK__Observaci__Vehic__23893F36" Association="Self.FK__Observaci__Vehic__23893F36">
       <End Role="Vehiculo" EntitySet="Vehiculo" />
       <End Role="ObservacionVehiculo" EntitySet="ObservacionVehiculo" />
     </AssociationSet>
@@ -473,31 +475,39 @@
       <End Role="Rol" EntitySet="Rol" />
       <End Role="RolMenu" EntitySet="RolMenu" />
     </AssociationSet>
-    <AssociationSet Name="FK__Usuario__Afiliad__2C88998B" Association="Self.FK__Usuario__Afiliad__2C88998B">
-      <End Role="Afiliado" EntitySet="Afiliado" />
-      <End Role="Usuario" EntitySet="Usuario" />
+    <AssociationSet Name="FK__Tercero__Tipo__5FD33367" Association="Self.FK__Tercero__Tipo__5FD33367">
+      <End Role="Tipo" EntitySet="Tipo" />
+      <End Role="Tercero" EntitySet="Tercero" />
     </AssociationSet>
-    <AssociationSet Name="FK__Usuario__Emplead__2B947552" Association="Self.FK__Usuario__Emplead__2B947552">
-      <End Role="Empleado" EntitySet="Empleado" />
-      <End Role="Usuario" EntitySet="Usuario" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Usuario__RolID__2AA05119" Association="Self.FK__Usuario__RolID__2AA05119">
+    <AssociationSet Name="FK__Usuario__RolID__06ED0088" Association="Self.FK__Usuario__RolID__06ED0088">
       <End Role="Rol" EntitySet="Rol" />
       <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>
-    <AssociationSet Name="FK__Vehiculo__Afilia__2022C2A6" Association="Self.FK__Vehiculo__Afilia__2022C2A6">
-      <End Role="Afiliado" EntitySet="Afiliado" />
-      <End Role="Vehiculo" EntitySet="Vehiculo" />
+    <AssociationSet Name="FK__Usuario__Tercero__05F8DC4F" Association="Self.FK__Usuario__Tercero__05F8DC4F">
+      <End Role="Tercero" EntitySet="Tercero" />
+      <End Role="Usuario" EntitySet="Usuario" />
     </AssociationSet>
-    <AssociationSet Name="FK__Vehiculo__Combus__1E3A7A34" Association="Self.FK__Vehiculo__Combus__1E3A7A34">
+    <AssociationSet Name="FK__Vehiculo__Combus__1CDC41A7" Association="Self.FK__Vehiculo__Combus__1CDC41A7">
       <End Role="Tipo" EntitySet="Tipo" />
       <End Role="Vehiculo" EntitySet="Vehiculo" />
     </AssociationSet>
-    <AssociationSet Name="FK__Vehiculo__MarcaI__1F2E9E6D" Association="Self.FK__Vehiculo__MarcaI__1F2E9E6D">
+    <AssociationSet Name="FK__Vehiculo__Combus__1DD065E0" Association="Self.FK__Vehiculo__Combus__1DD065E0">
       <End Role="Tipo" EntitySet="Tipo" />
       <End Role="Vehiculo" EntitySet="Vehiculo" />
     </AssociationSet>
-    <AssociationSet Name="FK__Vehiculo__TipoID__2116E6DF" Association="Self.FK__Vehiculo__TipoID__2116E6DF">
+    <AssociationSet Name="FK__Vehiculo__MarcaI__1EC48A19" Association="Self.FK__Vehiculo__MarcaI__1EC48A19">
+      <End Role="Tipo" EntitySet="Tipo" />
+      <End Role="Vehiculo" EntitySet="Vehiculo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vehiculo__MarcaI__1FB8AE52" Association="Self.FK__Vehiculo__MarcaI__1FB8AE52">
+      <End Role="Tipo" EntitySet="Tipo" />
+      <End Role="Vehiculo" EntitySet="Vehiculo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vehiculo__Tercer__1BE81D6E" Association="Self.FK__Vehiculo__Tercer__1BE81D6E">
+      <End Role="Tercero" EntitySet="Tercero" />
+      <End Role="Vehiculo" EntitySet="Vehiculo" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Vehiculo__TipoID__20ACD28B" Association="Self.FK__Vehiculo__TipoID__20ACD28B">
       <End Role="Tipo" EntitySet="Tipo" />
       <End Role="Vehiculo" EntitySet="Vehiculo" />
     </AssociationSet>

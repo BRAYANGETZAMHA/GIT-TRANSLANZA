@@ -27,7 +27,7 @@ namespace Translanza.Models
         public Nullable<int> TipoID { get; set; }
         public Nullable<int> NoPasajeros { get; set; }
         public Nullable<int> CombustibleID { get; set; }
-        public Nullable<int> AfiliadoID { get; set; }
+        public Nullable<int> TerceroID { get; set; }
         public string Img_TarjetaOperacion { get; set; }
         public Nullable<System.DateTime> Vencimiento_Tecnomecanica { get; set; }
         public string Img_Tecnomecanica { get; set; }
@@ -46,7 +46,9 @@ namespace Translanza.Models
         public virtual Tipo Tipo { get; set; }
         public virtual Tipo Tipo1 { get; set; }
         public virtual Tipo Tipo2 { get; set; }
-        public virtual Afiliado Afiliado { get; set; }
+        public virtual Tipo Tipo3 { get; set; }
+        public virtual Tipo Tipo4 { get; set; }
         public virtual ICollection<ObservacionVehiculo> ObservacionVehiculo { get; set; }
+        public virtual Tercero Tercero { get; set; }
     }
 }

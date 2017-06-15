@@ -12,27 +12,16 @@ namespace Translanza.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Empleado
+    public partial class EspecialidadConductor
     {
-        public Empleado()
-        {
-            this.Usuario = new HashSet<Usuario>();
-        }
-    
         public int RowID { get; set; }
-        public Nullable<int> Identificacion { get; set; }
-        public string Nombre { get; set; }
-        public string Apellido { get; set; }
-        public string Telefono { get; set; }
-        public string Celular { get; set; }
-        public string Direccion { get; set; }
-        public string Correo { get; set; }
+        public int TipoID { get; set; }
         public Nullable<bool> Activo { get; set; }
         public string UsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string UsuarioActualizacion { get; set; }
         public Nullable<System.DateTime> FechaActualizacion { get; set; }
     
-        public virtual ICollection<Usuario> Usuario { get; set; }
+        public virtual Tipo Tipo { get; set; }
     }
 }

@@ -39,7 +39,7 @@
                         </div>
                     </div>
 
-                    <div class="row form-group">
+                    @*<div class="row form-group">
                         <div class="col-md-2">
                             <label>Tipo:</label>
                         </div>
@@ -50,23 +50,23 @@
                                 <option value="afiliado">Afiliado</option>
                             </select>
                         </div>
-                    </div>
+                    </div>*@
 
 
                     @*@if (Model.EmpleadoID > 0)
                         {*@
-                    <div class="row form-group" id="listaEmpleado" hidden>
+                    <div class="row form-group" id="listaTercero">
                         <div class="col-md-2">
-                            <label>Empleado:</label>
+                            <label>Tercero:</label>
                         </div>
                         <div class="col-md-4">
-                            <select name="empleado" style="width:100%" class="select2" required>
+                            <select name="tercero" style="width:100%" class="select2" required>
 
                                 <option value="" disabled selected>Seleccione una opcion</option>
 
-                                @foreach (Empleado item in ViewBag.listaEmpleado)
+                                @foreach (Tercero item in ViewBag.listaTercero)
                                 {
-                                    if (Model.RowID > 0 && item.RowID == Model.EmpleadoID)
+                                    if (Model.RowID > 0 && item.RowID == Model.TerceroID)
                                     {
                                         <option value="@item.RowID" selected>@item.Identificacion - @item.Nombre @item.Apellido</option>
                                     }
@@ -82,7 +82,7 @@
                     @*}
                         else
                         {*@
-                    <div class="row form-group" id="listaAfiliado" hidden>
+                    @*<div class="row form-group" id="listaAfiliado" hidden>
                         <div class="col-md-2">
                             <label>Afiliado:</label>
                         </div>
@@ -104,7 +104,7 @@
                                 }
                             </select>
                         </div>
-                    </div>
+                    </div>*@
                     @*}*@
 
                     <div class="row form-group">
@@ -178,7 +178,7 @@
         $('#lblactivo').addClass("btn-primary");
     }
 
-    if ("@Model.EmpleadoID" != "")
+    @*if ("@Model.EmpleadoID" != "")
     {
         $("#listaEmpleado").show();
 
@@ -187,7 +187,7 @@
     {
         $("#listaAfiliado").show();
 
-    }
+    }*@
 
     $(document).ready(function () {
 
@@ -207,21 +207,21 @@
             $('#lblinactivo').addClass("btn-primary");
         });
 
-        $("#tipo").change(function () {
+        //$("#tipo").change(function () {
 
-            if ($('#tipo').val() == "empleado") {
-                $("#listaAfiliado").hide();
-                $("#listaEmpleado").show();
+        //    if ($('#tipo').val() == "empleado") {
+        //        $("#listaAfiliado").hide();
+        //        $("#listaEmpleado").show();
 
-            }
-            else {
-                $("#listaEmpleado").hide();
-                $("#listaAfiliado").show();
-            }
+        //    }
+        //    else {
+        //        $("#listaEmpleado").hide();
+        //        $("#listaAfiliado").show();
+        //    }
 
-            $('.select2').css('width', '100%')
+        //    $('.select2').css('width', '100%')
 
-        });
+        //});
 
     })
 

@@ -22,7 +22,7 @@ namespace Translanza.Controllers
             if (usuarioLogeado != null)
             {
                 ViewBag.Usuario = usuarioLogeado;
-                ViewBag.Empleado = db.Empleado.Where(f => f.RowID == usuarioLogeado.EmpleadoID).FirstOrDefault();
+                ViewBag.Tercero = db.Tercero.Where(f => f.RowID == usuarioLogeado.TerceroID).FirstOrDefault();
             }
 
             return View();
@@ -41,20 +41,20 @@ namespace Translanza.Controllers
             string celular = Request.Params["celular"];
             string correo = Request.Params["correo"];
 
-            Empleado obj_Empleado = db.Empleado.Where(f => f.RowID == rowid).FirstOrDefault();
+            Tercero obj_Tercero = db.Tercero.Where(f => f.RowID == rowid).FirstOrDefault();
 
-            obj_Empleado.Identificacion = identificacion;
-            obj_Empleado.Nombre = nombres;
-            obj_Empleado.Apellido = apellidos;
-            obj_Empleado.Telefono = telefono;
-            obj_Empleado.Celular = celular;
-            obj_Empleado.Correo = correo;
-            obj_Empleado.FechaActualizacion = DateTime.Now;
-            obj_Empleado.UsuarioActualizacion = usuarioLogeo.NombreUsuario;
+            obj_Tercero.Identificacion = identificacion;
+            obj_Tercero.Nombre = nombres;
+            obj_Tercero.Apellido = apellidos;
+            obj_Tercero.Telefono = telefono;
+            obj_Tercero.Celular = celular;
+            obj_Tercero.Correo = correo;
+            obj_Tercero.FechaActualizacion = DateTime.Now;
+            obj_Tercero.UsuarioActualizacion = usuarioLogeo.NombreUsuario;
 
             db.SaveChanges();
 
-            return Json(obj_Empleado.RowID.ToString());
+            return Json(obj_Tercero.RowID.ToString());
         }
 
         [HttpPost]
@@ -94,8 +94,8 @@ namespace Translanza.Controllers
         {
             Session["Modulo"] = "Configuración";
             Session["SubModulo"] = "Usuario";
-            ViewBag.listaEmpleado = db.Empleado.Where(f => f.Activo == true);
-            ViewBag.listaAfiliado = db.Afiliado.Where(f => f.Activo == true);
+            ViewBag.listaTercero = db.Tercero.Where(f => f.Activo == true);
+            //ViewBag.listaAfiliado = db.Afiliado.Where(f => f.Activo == true);
             ViewBag.listaRol = db.Rol.Where(f => f.Activo == true);
 
             Usuario obj = new Usuario();
@@ -111,24 +111,7 @@ namespace Translanza.Controllers
             Usuario usuarioLogeo = ((Usuario)Session["Usuario"]);
 
             int rowid = int.Parse(Request.Params["rowid"]);
-            string nombreusuario = Request.Params["nombreusuario"];
-            string contraseña = Request.Params["contraseña"];
-            int empleado = 0;
-            int afiliado = 0;
-
-            string tipo = Request.Params["tipo"];
-
-            if (tipo == "empleado")
-            {
-                empleado = int.Parse(Request.Params["empleado"]);
-            }
-            else
-            {
-                afiliado = int.Parse(Request.Params["afiliado"]);
-            }
-
-            int rol = int.Parse(Request.Params["rol"]);
-
+            
             Usuario obj = new Usuario();
 
             if (rowid != 0)
@@ -136,21 +119,12 @@ namespace Translanza.Controllers
                 obj = db.Usuario.Where(f => f.RowID == rowid).FirstOrDefault();
             }
 
-            obj.NombreUsuario = nombreusuario;
+            obj.NombreUsuario = Request.Params["nombreusuario"];
+            obj.TerceroID = int.Parse(Request.Params["tercero"]);
+            obj.RolID = int.Parse(Request.Params["rol"]);
 
-            if (empleado > 0)
-            {
-                obj.EmpleadoID = empleado;
-            }
-            else
-            {
-                obj.AfiliadoID = afiliado;
-            }
-
-            obj.RolID = rol;
-
-            if (contraseña != "")
-                obj.Contraseña = contraseña;
+            if (Request.Params["contraseña"] != "")
+                obj.Contraseña = Request.Params["contraseña"];
 
             if (obj.RowID == 0)
             {

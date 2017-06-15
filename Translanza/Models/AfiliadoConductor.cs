@@ -12,13 +12,18 @@ namespace Translanza.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Especialidad
+    public partial class AfiliadoConductor
     {
         public int RowID { get; set; }
-        public Nullable<int> ConductorID { get; set; }
-        public Nullable<int> TipoID { get; set; }
+        public int AfiliadoID { get; set; }
+        public int ConductorID { get; set; }
+        public Nullable<bool> Activo { get; set; }
+        public string UsuarioCreacion { get; set; }
+        public Nullable<System.DateTime> FechaCreacion { get; set; }
+        public string UsuarioActualizacion { get; set; }
+        public Nullable<System.DateTime> FechaActualizacion { get; set; }
     
-        public virtual Tipo Tipo { get; set; }
-        public virtual Conductor Conductor { get; set; }
+        public virtual Tercero Tercero { get; set; }
+        public virtual Tercero Tercero1 { get; set; }
     }
 }

@@ -16,11 +16,14 @@ namespace Translanza.Models
     {
         public Tipo()
         {
+            this.EspecialidadConductor = new HashSet<EspecialidadConductor>();
+            this.Tercero = new HashSet<Tercero>();
             this.Vehiculo = new HashSet<Vehiculo>();
             this.Vehiculo1 = new HashSet<Vehiculo>();
             this.Vehiculo2 = new HashSet<Vehiculo>();
+            this.Vehiculo3 = new HashSet<Vehiculo>();
+            this.Vehiculo4 = new HashSet<Vehiculo>();
             this.Menu = new HashSet<Menu>();
-            this.Especialidad = new HashSet<Especialidad>();
         }
     
         public int RowID { get; set; }
@@ -37,10 +40,13 @@ namespace Translanza.Models
         public Nullable<System.DateTime> FechaActualizacion { get; set; }
     
         public virtual Agrupacion Agrupacion { get; set; }
+        public virtual ICollection<EspecialidadConductor> EspecialidadConductor { get; set; }
+        public virtual ICollection<Tercero> Tercero { get; set; }
         public virtual ICollection<Vehiculo> Vehiculo { get; set; }
         public virtual ICollection<Vehiculo> Vehiculo1 { get; set; }
         public virtual ICollection<Vehiculo> Vehiculo2 { get; set; }
+        public virtual ICollection<Vehiculo> Vehiculo3 { get; set; }
+        public virtual ICollection<Vehiculo> Vehiculo4 { get; set; }
         public virtual ICollection<Menu> Menu { get; set; }
-        public virtual ICollection<Especialidad> Especialidad { get; set; }
     }
 }

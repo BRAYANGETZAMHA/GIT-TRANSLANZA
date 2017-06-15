@@ -273,13 +273,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Afiliado.cs">
+    <Compile Include="Models\AfiliadoConductor.cs">
       <DependentUpon>DAO_Translanza.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Agrupacion.cs">
-      <DependentUpon>DAO_Translanza.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Conductor.cs">
       <DependentUpon>DAO_Translanza.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\CuentaModels.cs" />
@@ -298,10 +295,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DAO_Translanza.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\Empleado.cs">
-      <DependentUpon>DAO_Translanza.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Especialidad.cs">
+    <Compile Include="Models\EspecialidadConductor.cs">
       <DependentUpon>DAO_Translanza.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Menu.cs">
@@ -317,6 +311,9 @@
       <DependentUpon>DAO_Translanza.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\RolMenu.cs">
+      <DependentUpon>DAO_Translanza.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Tercero.cs">
       <DependentUpon>DAO_Translanza.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Tipo.cs">

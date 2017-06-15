@@ -17,8 +17,7 @@ namespace Translanza.Models
         public int RowID { get; set; }
         public string NombreUsuario { get; set; }
         public string Contraseña { get; set; }
-        public Nullable<int> EmpleadoID { get; set; }
-        public Nullable<int> AfiliadoID { get; set; }
+        public Nullable<int> TerceroID { get; set; }
         public Nullable<int> RolID { get; set; }
         public Nullable<bool> Activo { get; set; }
         public string UsuarioCreacion { get; set; }
@@ -26,8 +25,7 @@ namespace Translanza.Models
         public string UsuarioActualizacion { get; set; }
         public Nullable<System.DateTime> FechaActualizacion { get; set; }
     
-        public virtual Afiliado Afiliado { get; set; }
-        public virtual Empleado Empleado { get; set; }
+        public virtual Tercero Tercero { get; set; }
         public virtual Rol Rol { get; set; }
     }
 }

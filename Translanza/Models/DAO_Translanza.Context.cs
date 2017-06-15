@@ -27,16 +27,15 @@ namespace Translanza.Models
     
         public virtual DbSet<Agrupacion> Agrupacion { get; set; }
         public virtual DbSet<Tipo> Tipo { get; set; }
-        public virtual DbSet<Afiliado> Afiliado { get; set; }
-        public virtual DbSet<Empleado> Empleado { get; set; }
+        public virtual DbSet<AfiliadoConductor> AfiliadoConductor { get; set; }
+        public virtual DbSet<EspecialidadConductor> EspecialidadConductor { get; set; }
+        public virtual DbSet<ObservacionConductor> ObservacionConductor { get; set; }
+        public virtual DbSet<ObservacionVehiculo> ObservacionVehiculo { get; set; }
+        public virtual DbSet<Tercero> Tercero { get; set; }
         public virtual DbSet<Vehiculo> Vehiculo { get; set; }
         public virtual DbSet<Menu> Menu { get; set; }
         public virtual DbSet<Rol> Rol { get; set; }
         public virtual DbSet<RolMenu> RolMenu { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
-        public virtual DbSet<Especialidad> Especialidad { get; set; }
-        public virtual DbSet<ObservacionConductor> ObservacionConductor { get; set; }
-        public virtual DbSet<ObservacionVehiculo> ObservacionVehiculo { get; set; }
-        public virtual DbSet<Conductor> Conductor { get; set; }
     }
 }
