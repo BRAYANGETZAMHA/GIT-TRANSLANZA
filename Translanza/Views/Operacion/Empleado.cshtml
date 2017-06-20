@@ -1,99 +1,99 @@
-﻿@model Translanza.Models.Empleado
-@{
-    Layout = "~/Views/Inicio/Diseño_Administrativo.cshtml";
-}
+﻿@model Translanza.Models.Tercero
+    @{
+        Layout = "~/Views/Inicio/Diseño_Administrativo.cshtml";
+    }
 
-<section class="content">
-    <div class="col-xs-12">
+    <section class="content">
+        <div class="col-xs-12">
 
-        <a href="@Url.Action("VistaEmpleado", "Operacion")"><i class="glyphicon glyphicon-chevron-left"></i>Volver a lista</a>
+            <a href="@Url.Action("VistaEmpleado", "Operacion")"><i class="glyphicon glyphicon-chevron-left"></i>Volver a lista</a>
 
-        <br /><br />
+            <br /><br />
 
-        <div class="panel panel-success">
-            <div class="panel-heading">Conductor</div>
-            <div class="panel-body">
-                <form id="formEmpleado" method="post" novalidate enctype="multipart/form-data">
-                    <div class="row form-group">
-                        <div class="col-md-2">
-                            <label>Identificación:*</label>
+            <div class="panel panel-success">
+                <div class="panel-heading">Empleado</div>
+                <div class="panel-body">
+                    <form id="formEmpleado" method="post" novalidate enctype="multipart/form-data">
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Identificación:*</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="hidden" id="rowid" name="rowid" value="@Model.RowID" />
+                                <input type="number" id="identificacion" name="identificacion" value="@Model.Identificacion" required class="form-control">
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <input type="hidden" id="rowid" name="rowid" value="@Model.RowID" />
-                            <input type="number" id="identificacion" name="identificacion" value="@Model.Identificacion" required="required" data-validate-minmax="10,100" class="form-control">
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Nombres:*</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" id="nombres" name="nombres" value="@Model.Nombre" required class="form-control">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-md-2">
-                            <label>Nombres:*</label>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Apellidos:*</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="text" id="apellidos" name="apellidos" value="@Model.Apellido" required class="form-control">
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <input type="text" id="nombres" name="nombres" value="@Model.Nombre" required="required" data-validate-minmax="10,100" class="form-control">
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Telefono:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="number" id="telefono" name="telefono" value="@Model.Telefono" class="form-control">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-md-2">
-                            <label>Apellidos:</label>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Celular:</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="number" id="celular" name="celular" value="@Model.Celular" class="form-control">
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <input type="text" id="apellidos" name="apellidos" value="@Model.Apellido" required="required" data-validate-minmax="10,100" class="form-control">
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Correo:*</label>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="email" id="correo" name="correo" value="@Model.Correo" required class="form-control">
+                            </div>
                         </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-md-2">
-                            <label>Telefono:</label>
+                        <div class="row form-group">
+                            <div class="col-md-2">
+                                <label>Estado:</label>
+                            </div>
+                            <div class="col-md-4 btn-group" data-toggle="buttons">
+                                <label class="btn btn-default" id="lblinactivo">
+                                    <input type="radio" name="inactivo" id="inactivo">Inactivo
+                                </label>
+                                <label class="btn btn-default" id="lblactivo">
+                                    <input type="radio" name="activo" id="activo">Activo
+                                </label>
+                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <input type="number" id="telefono" name="telefono" value="@Model.Telefono" required="required" data-validate-minmax="10,100" class="form-control">
+                        <div class="row form-group">
+                            <div class="col-md-6 ">
+                                @*<button type="submit" class="btn btn-primary">Cancel</button>*@
+                                <button id="send" type="button" onclick="Guardar()" class="btn btn-success">Guardar</button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-md-2">
-                            <label>Celular:</label>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="number" id="celular" name="celular" value="@Model.Celular" required="required" data-validate-minmax="10,100" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-md-2">
-                            <label>Correo:</label>
-                        </div>
-                        <div class="col-md-4">
-                            <input type="email" id="correo" name="correo" value="@Model.Correo" required="required" data-validate-minmax="10,100" class="form-control">
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-md-2">
-                            <label>Estado:</label>
-                        </div>
-                        <div class="col-md-4 btn-group" data-toggle="buttons">
-                            <label class="btn btn-default" id="lblinactivo">
-                                <input type="radio" name="inactivo" id="inactivo">Inactivo
-                            </label>
-                            <label class="btn btn-default" id="lblactivo">
-                                <input type="radio" name="activo" id="activo">Activo
-                            </label>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-md-6 ">
-                            @*<button type="submit" class="btn btn-primary">Cancel</button>*@
-                            <button id="send" type="button" onclick="Guardar()" class="btn btn-success">Guardar</button>
-                        </div>
-                    </div>
-                </form>
+                    </form>
 
 
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
 
 
-<script>
+    <script>
 
     if (@Model.RowID>0) {
         if ("@Model.Activo"=="True") {
@@ -104,6 +104,11 @@
             $('#inactivo').attr('checked',true);
             $('#lblinactivo').addClass("btn-primary");
         }
+    }
+    else {
+        //Deja por defecto activo
+        $('#activo').attr('checked', true);
+        $('#lblactivo').addClass("btn-primary");
     }
 
     $(document).ready(function () {
@@ -146,4 +151,4 @@
         })
     }
 
-</script>
+    </script>

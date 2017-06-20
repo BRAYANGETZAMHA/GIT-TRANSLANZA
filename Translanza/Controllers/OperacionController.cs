@@ -20,7 +20,7 @@ namespace Translanza.Controllers
             Session["Modulo"] = "Operación";
             Session["SubModulo"] = "Vista Empleado";
 
-            ViewBag.Lista = db.Empleado.Where(f => f.Activo == true);
+            ViewBag.Lista = db.Tercero.Where(f => f.Tipo.Codigo == "EMPLEADO");
 
             return View();
         }
@@ -31,9 +31,9 @@ namespace Translanza.Controllers
             Session["Modulo"] = "Operación";
             Session["SubModulo"] = "Empleado";
 
-            Empleado obj = new Empleado();
+            Tercero obj = new Tercero();
             if (rowid != 0 && rowid != null)
-                obj = db.Empleado.Where(f => f.RowID == rowid).FirstOrDefault();
+                obj = db.Tercero.Where(f => f.RowID == rowid).FirstOrDefault();
 
             return View(obj);
         }
@@ -44,34 +44,36 @@ namespace Translanza.Controllers
             Usuario usuarioLogeo = ((Usuario)Session["Usuario"]);
 
             int rowid = int.Parse(Request.Params["rowid"]);
-            string nombres = Request.Params["nombres"];
-            string apellidos = Request.Params["apellidos"];
-            string identificacion = Request.Params["identificacion"];
-            string telefono = Request.Params["telefono"];
-            string celular = Request.Params["celular"];
-            string correo = Request.Params["correo"];
 
-
-            Empleado obj = new Empleado();
+            Tercero obj = new Tercero();
 
             if (rowid != 0)
             {
-                obj = db.Empleado.Where(f => f.RowID == rowid).FirstOrDefault();
+                obj = db.Tercero.Where(f => f.RowID == rowid).FirstOrDefault();
             }
 
-            obj.Identificacion = int.Parse(identificacion);
-            obj.Nombre = nombres;
-            obj.Apellido = apellidos;
-            obj.Telefono = telefono;
-            obj.Celular = celular;
-            obj.Correo = correo;
+            obj.Identificacion = Request.Params["identificacion"] != "" ? int.Parse(Request.Params["identificacion"]) : 0;
+            obj.Nombre = Request.Params["nombres"] != "" ? Request.Params["nombres"] : null;
+            obj.Apellido = Request.Params["apellidos"] != "" ? Request.Params["apellidos"] : null;
+            obj.Telefono = Request.Params["telefono"] != "" ? Request.Params["telefono"] : null;
+            obj.Celular = Request.Params["celular"] != "" ? Request.Params["celular"] : null;
+            obj.Correo = Request.Params["correo"] != "" ? Request.Params["correo"] : null;
+
+            if (Request.Params["activo"] == "on")
+            {
+                obj.Activo = true;
+            }
+            else
+            {
+                obj.Activo = false;
+            }
 
             if (obj.RowID == 0)
             {
-                obj.Activo = true;
+                obj.Tipo = db.Tipo.FirstOrDefault(f => f.Codigo == "EMPLEADO" && f.Agrupacion.Nombre == "TIPOTERCERO");
                 obj.FechaCreacion = DateTime.Now;
                 obj.UsuarioCreacion = usuarioLogeo.NombreUsuario;
-                db.Empleado.Add(obj);
+                db.Tercero.Add(obj);
             }
             else
             {
@@ -95,7 +97,7 @@ namespace Translanza.Controllers
             Session["Modulo"] = "Operación";
             Session["SubModulo"] = "Vista Afiliado";
 
-            ViewBag.Lista = db.Afiliado;
+            ViewBag.Lista = ViewBag.Lista = db.Tercero.Where(f => f.Tipo.Codigo == "AFILIADO");
 
             return View();
         }
@@ -106,9 +108,9 @@ namespace Translanza.Controllers
             Session["Modulo"] = "Operación";
             Session["SubModulo"] = "Afiliado";
 
-            Afiliado obj = new Afiliado();
+            Tercero obj = new Tercero();
             if (rowid != 0 && rowid != null)
-                obj = db.Afiliado.Where(f => f.RowID == rowid).FirstOrDefault();
+                obj = db.Tercero.Where(f => f.RowID == rowid).FirstOrDefault();
 
             return View(obj);
         }
@@ -123,11 +125,11 @@ namespace Translanza.Controllers
             HttpPostedFileBase docidentificacion = Request.Files["input_Identificacion"];
             string rutaIdentificacion = Request.Params["archivoRutaIdentificacion"];
 
-            Afiliado obj = new Afiliado();
+            Tercero obj = new Tercero();
 
             if (rowid != 0)
             {
-                obj = db.Afiliado.Where(f => f.RowID == rowid).FirstOrDefault();
+                obj = db.Tercero.Where(f => f.RowID == rowid).FirstOrDefault();
             }
 
             obj.Identificacion = int.Parse(Request.Params["identificacion"]);
@@ -151,11 +153,12 @@ namespace Translanza.Controllers
 
             if (obj.RowID == 0)
             {
+                obj.Tipo = db.Tipo.FirstOrDefault(f => f.Codigo == "AFILIADO" && f.Agrupacion.Nombre == "TIPOTERCERO");
                 obj.Img_DocIdentidad = GuardarImagen(docidentificacion, "Identificacion");
                 obj.Activo = true;
                 obj.FechaCreacion = DateTime.Now;
                 obj.UsuarioCreacion = usuarioLogeo.NombreUsuario;
-                db.Afiliado.Add(obj);
+                db.Tercero.Add(obj);
             }
             else
             {
@@ -194,7 +197,7 @@ namespace Translanza.Controllers
             Session["Modulo"] = "Operación";
             Session["SubModulo"] = "Vista Conductor";
 
-            ViewBag.Lista = db.Conductor;
+            ViewBag.Lista = db.Tercero.Where(f => f.Tipo.Codigo == "CONDUCTOR");
 
             return View();
         }
@@ -206,13 +209,15 @@ namespace Translanza.Controllers
             Session["SubModulo"] = "Conductor";
 
             ViewBag.listaTipoEspecialidad = db.Tipo.Where(f => f.Activo == true && f.Agrupacion.Nombre == "TipoEspecialidad").OrderBy(o => o.Orden).ToList();
+            ViewBag.listaAfiliado = db.Tercero.Where(f => f.Tipo.Codigo == "AFILIADO");
 
-            Conductor obj = new Conductor();
+            Tercero obj = new Tercero();
             if (rowid != 0 && rowid != null)
             {
-                obj = db.Conductor.Where(f => f.RowID == rowid).FirstOrDefault();
-                ViewBag.listaEspecialidad = db.Especialidad.Where(f => f.ConductorID == obj.RowID).ToList();
-                ViewBag.listaObservacion = db.ObservacionConductor.Where(f => f.ConductorID == obj.RowID).ToList();
+                obj = db.Tercero.Where(f => f.RowID == rowid).FirstOrDefault();
+                ViewBag.Afiliado = db.AfiliadoConductor.FirstOrDefault(f => f.ConductorID == obj.RowID);
+                ViewBag.listaEspecialidad = db.EspecialidadConductor.Where(f => f.TerceroID == obj.RowID).ToList();
+                ViewBag.listaObservacion = db.ObservacionConductor.Where(f => f.TerceroID == obj.RowID).ToList();
             }
 
             return View(obj);
@@ -235,12 +240,14 @@ namespace Translanza.Controllers
             string rutaLicencia = Request.Params["archivoRutaLicencia"];
             string rutaIdentificacion = Request.Params["archivoRutaIdentificacion"];
 
-            Conductor obj = new Conductor();
+            Tercero obj = new Tercero();
+            AfiliadoConductor objAfiliado = new AfiliadoConductor();
 
             //Si es una actualizacion consulto el objeto para asignar nuevos valores
             if (rowid != 0)
             {
-                obj = db.Conductor.Where(f => f.RowID == rowid).FirstOrDefault();
+                obj = db.Tercero.FirstOrDefault(f => f.RowID == rowid);
+                objAfiliado = db.AfiliadoConductor.FirstOrDefault(f => f.ConductorID == obj.RowID);
             }
 
             obj.Identificacion = int.Parse(Request.Params["identificacion"]);
@@ -250,6 +257,8 @@ namespace Translanza.Controllers
             obj.Celular = Request.Params["celular"];
             obj.Direccion = Request.Params["direccion"];
             obj.Correo = Request.Params["correo"];
+            //Asignacion afiliado
+            objAfiliado.AfiliadoID = int.Parse(Request.Params["afiliado"]);
 
             if (Request.Params["activo"] == "on")
             {
@@ -269,18 +278,27 @@ namespace Translanza.Controllers
                 obj.Calificacion = 0;
             }
 
-            if (usuarioLogeo.Afiliado != null)
-            {
-                obj.Afiliado = usuarioLogeo.Afiliado;
-            }
-
             if (obj.RowID == 0)
             {
+                obj.Tipo = db.Tipo.FirstOrDefault(f => f.Codigo == "CONDUCTOR" && f.Agrupacion.Nombre == "TIPOTERCERO");
                 obj.Img_DocIdentidad = GuardarImagen(docidentificacion, "Identificacion");
                 obj.Img_LicenciaConduccion = GuardarImagen(licencia, "Licencia");
                 obj.FechaCreacion = DateTime.Now;
                 obj.UsuarioCreacion = usuarioLogeo.NombreUsuario;
-                db.Conductor.Add(obj);
+                db.Tercero.Add(obj);
+                //Guardar afiliado
+                objAfiliado.ConductorID = obj.RowID;
+                objAfiliado.FechaCreacion = DateTime.Now;
+                objAfiliado.UsuarioCreacion = usuarioLogeo.NombreUsuario;
+                db.AfiliadoConductor.Add(objAfiliado);
+
+                //Almacenamiento de especialidades
+                foreach (string item in listaEspecialidadAgregar)
+                {
+                    db.EspecialidadConductor.Add(new EspecialidadConductor { TerceroID = obj.RowID, TipoID = int.Parse(item), UsuarioCreacion = usuarioLogeo.NombreUsuario, FechaCreacion = DateTime.Now });
+                }
+
+                db.SaveChanges();
             }
             else
             {
@@ -299,25 +317,36 @@ namespace Translanza.Controllers
                 obj.FechaActualizacion = DateTime.Now;
                 obj.UsuarioActualizacion = usuarioLogeo.NombreUsuario;
 
+                //Guardar afiliado
+                objAfiliado.FechaActualizacion = DateTime.Now;
+                objAfiliado.UsuarioActualizacion = usuarioLogeo.NombreUsuario;
+
                 //Eliminar especialidades asignadas al conductor para insertar las nuevas especialidades
-                List<Especialidad> listaEspecialidadEliminar = db.Especialidad.Where(f => f.ConductorID == rowid).ToList();
-                db.Especialidad.RemoveRange(listaEspecialidadEliminar);
+                List<EspecialidadConductor> listaEspecialidadEliminar = db.EspecialidadConductor.Where(f => f.TerceroID == rowid).ToList();
 
+                //Almacenamiento de especialidades
+                foreach (string item in listaEspecialidadAgregar)
+                {
+                    int idTipo = int.Parse(item);
+                    EspecialidadConductor especialidadEliminar = null;
+
+                    if ((especialidadEliminar = listaEspecialidadEliminar.FirstOrDefault(f => f.TipoID == idTipo)) != null)
+                    {
+                        listaEspecialidadEliminar.Remove(especialidadEliminar);
+                    }
+                    else
+                    {
+                        db.EspecialidadConductor.Add(new EspecialidadConductor { TerceroID = obj.RowID, TipoID = idTipo, UsuarioCreacion = usuarioLogeo.NombreUsuario, FechaCreacion = DateTime.Now });
+                    }
+                }
+
+                if (listaEspecialidadEliminar.Count > 0)
+                {
+                    db.EspecialidadConductor.RemoveRange(listaEspecialidadEliminar);
+                }
+
+                db.SaveChanges();
             }
-            db.SaveChanges();
-
-            //Almacenamiento de especialidades
-            foreach (string item in listaEspecialidadAgregar)
-            {
-                Especialidad obj_Especialidad = new Especialidad();
-
-                obj_Especialidad.ConductorID = obj.RowID;
-                obj_Especialidad.TipoID = int.Parse(item);
-                db.Especialidad.Add(obj_Especialidad);
-            }
-
-            db.SaveChanges();
-
             return Json(obj.RowID.ToString());
         }
 
@@ -336,7 +365,7 @@ namespace Translanza.Controllers
             //{
             //    obj = db.Conductor.Where(f => f.RowID == rowid).FirstOrDefault();
             //}
-            obj.ConductorID = rowid;
+            obj.TerceroID = rowid;
             obj.Descripcion = descripcion;
 
             //if (obj.RowID == 0)
@@ -369,7 +398,7 @@ namespace Translanza.Controllers
 
             if (((Usuario)Session["Usuario"]).Rol.Nombre == "Afiliado")
             {
-                ViewBag.Lista = db.Vehiculo.Where(f => f.Afiliado == ((Usuario)Session["Usuario"]).Afiliado);
+                ViewBag.Lista = db.Vehiculo.Where(f => f.TerceroID == ((Usuario)Session["Usuario"]).TerceroID);
             }
             else
             {
@@ -394,7 +423,7 @@ namespace Translanza.Controllers
                     ViewBag.listaObservacion = db.ObservacionVehiculo.Where(f => f.VehiculoID == obj.RowID).ToList();
                 }
 
-                ViewBag.listaPropietario = db.Afiliado.Where(f => f.Activo == true).OrderBy(o => o.Nombre).ToList();
+                ViewBag.listaPropietario = db.Tercero.Where(f => f.Activo == true && f.Tipo.Codigo == "AFILIADO").OrderBy(o => o.Nombre).ToList();
                 ViewBag.listaMarca = db.Tipo.Where(f => f.Activo == true && f.Agrupacion.Nombre == "Marca").OrderBy(o => o.Orden).ToList();
                 ViewBag.listaTipoVehiculo = db.Tipo.Where(f => f.Activo == true && f.Agrupacion.Nombre == "TipoVehiculo").OrderBy(o => o.Orden).ToList();
                 ViewBag.listaTipoCombustible = db.Tipo.Where(f => f.Activo == true && f.Agrupacion.Nombre == "TipoCombustible").OrderBy(o => o.Orden).ToList();
@@ -439,7 +468,7 @@ namespace Translanza.Controllers
                 obj.Activo = false;
             }
 
-            obj.AfiliadoID = int.Parse(Request.Params["propietario"]);
+            obj.TerceroID = int.Parse(Request.Params["propietario"]);
             obj.Placa = Request.Params["placa"];
             obj.Modelo = Request.Params["modelo"];
             obj.Linea = Request.Params["linea"];

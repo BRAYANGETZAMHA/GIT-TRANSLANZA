@@ -15,13 +15,12 @@ namespace Translanza.Models
     public partial class EspecialidadConductor
     {
         public int RowID { get; set; }
-        public int TipoID { get; set; }
-        public Nullable<bool> Activo { get; set; }
+        public Nullable<int> TerceroID { get; set; }
+        public Nullable<int> TipoID { get; set; }
         public string UsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
-        public string UsuarioActualizacion { get; set; }
-        public Nullable<System.DateTime> FechaActualizacion { get; set; }
     
         public virtual Tipo Tipo { get; set; }
+        public virtual Tercero Tercero { get; set; }
     }
 }

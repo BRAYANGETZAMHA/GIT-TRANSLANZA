@@ -18,6 +18,7 @@ namespace Translanza.Models
         {
             this.AfiliadoConductor = new HashSet<AfiliadoConductor>();
             this.AfiliadoConductor1 = new HashSet<AfiliadoConductor>();
+            this.EspecialidadConductor = new HashSet<EspecialidadConductor>();
             this.ObservacionConductor = new HashSet<ObservacionConductor>();
             this.Usuario = new HashSet<Usuario>();
             this.Vehiculo = new HashSet<Vehiculo>();
@@ -34,16 +35,17 @@ namespace Translanza.Models
         public string Img_DocIdentidad { get; set; }
         public string Img_LicenciaConduccion { get; set; }
         public Nullable<int> Calificacion { get; set; }
-        public int Tipo { get; set; }
+        public Nullable<int> TipoID { get; set; }
         public Nullable<bool> Activo { get; set; }
         public string UsuarioCreacion { get; set; }
         public Nullable<System.DateTime> FechaCreacion { get; set; }
         public string UsuarioActualizacion { get; set; }
         public Nullable<System.DateTime> FechaActualizacion { get; set; }
     
-        public virtual Tipo Tipo1 { get; set; }
+        public virtual Tipo Tipo { get; set; }
         public virtual ICollection<AfiliadoConductor> AfiliadoConductor { get; set; }
         public virtual ICollection<AfiliadoConductor> AfiliadoConductor1 { get; set; }
+        public virtual ICollection<EspecialidadConductor> EspecialidadConductor { get; set; }
         public virtual ICollection<ObservacionConductor> ObservacionConductor { get; set; }
         public virtual ICollection<Usuario> Usuario { get; set; }
         public virtual ICollection<Vehiculo> Vehiculo { get; set; }

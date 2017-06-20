@@ -48,12 +48,10 @@
       <PropertyRef Name="RowID" />
     </Key>
     <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TipoID" Type="int" Nullable="false" />
-    <Property Name="Activo" Type="bit" />
+    <Property Name="TerceroID" Type="int" />
+    <Property Name="TipoID" Type="int" />
     <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaCreacion" Type="date" />
-    <Property Name="UsuarioActualizacion" Type="varchar" MaxLength="50" />
-    <Property Name="FechaActualizacion" Type="date" />
   </EntityType>
   <EntityType Name="ObservacionConductor">
     <Key>
@@ -92,7 +90,7 @@
     <Property Name="Img_DocIdentidad" Type="varchar" MaxLength="100" />
     <Property Name="Img_LicenciaConduccion" Type="varchar" MaxLength="100" />
     <Property Name="Calificacion" Type="int" />
-    <Property Name="Tipo" Type="int" Nullable="false" />
+    <Property Name="TipoID" Type="int" />
     <Property Name="Activo" Type="bit" />
     <Property Name="UsuarioCreacion" Type="varchar" MaxLength="50" />
     <Property Name="FechaCreacion" Type="date" />
@@ -210,8 +208,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Especiali__TipoI__3F3159AB">
-    <End Role="Tipo" Type="Self.Tipo" Multiplicity="1" />
+  <Association Name="FK__Especiali__Terce__7C3A67EB">
+    <End Role="Tercero" Type="Self.Tercero" Multiplicity="0..1" />
+    <End Role="EspecialidadConductor" Type="Self.EspecialidadConductor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tercero">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="EspecialidadConductor">
+        <PropertyRef Name="TerceroID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Especiali__TipoI__1F83A428">
+    <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
     <End Role="EspecialidadConductor" Type="Self.EspecialidadConductor" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Tipo">
@@ -295,14 +305,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Tercero__Tipo__5FD33367">
-    <End Role="Tipo" Type="Self.Tipo" Multiplicity="1" />
+    <End Role="Tipo" Type="Self.Tipo" Multiplicity="0..1" />
     <End Role="Tercero" Type="Self.Tercero" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Tipo">
         <PropertyRef Name="RowID" />
       </Principal>
       <Dependent Role="Tercero">
-        <PropertyRef Name="Tipo" />
+        <PropertyRef Name="TipoID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -447,7 +457,11 @@
       <End Role="Tercero" EntitySet="Tercero" />
       <End Role="AfiliadoConductor" EntitySet="AfiliadoConductor" />
     </AssociationSet>
-    <AssociationSet Name="FK__Especiali__TipoI__3F3159AB" Association="Self.FK__Especiali__TipoI__3F3159AB">
+    <AssociationSet Name="FK__Especiali__Terce__7C3A67EB" Association="Self.FK__Especiali__Terce__7C3A67EB">
+      <End Role="Tercero" EntitySet="Tercero" />
+      <End Role="EspecialidadConductor" EntitySet="EspecialidadConductor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Especiali__TipoI__1F83A428" Association="Self.FK__Especiali__TipoI__1F83A428">
       <End Role="Tipo" EntitySet="Tipo" />
       <End Role="EspecialidadConductor" EntitySet="EspecialidadConductor" />
     </AssociationSet>

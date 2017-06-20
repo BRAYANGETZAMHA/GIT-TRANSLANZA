@@ -17,7 +17,7 @@
       <End Role="Agrupacion" EntitySet="Agrupacion" />
       <End Role="Tipo" EntitySet="Tipo" />
     </AssociationSet>
-    <AssociationSet Name="FK__Especiali__TipoI__3F3159AB" Association="TranslanzaModel.FK__Especiali__TipoI__3F3159AB">
+    <AssociationSet Name="FK__Especiali__TipoI__1F83A428" Association="TranslanzaModel.FK__Especiali__TipoI__1F83A428">
       <End Role="Tipo" EntitySet="Tipo" />
       <End Role="EspecialidadConductor" EntitySet="EspecialidadConductor" />
     </AssociationSet>
@@ -56,6 +56,10 @@
     <AssociationSet Name="FK__AfiliadoC__Condu__2B2A60FE" Association="TranslanzaModel.FK__AfiliadoC__Condu__2B2A60FE">
       <End Role="Tercero" EntitySet="Tercero" />
       <End Role="AfiliadoConductor" EntitySet="AfiliadoConductor" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Especiali__Terce__7C3A67EB" Association="TranslanzaModel.FK__Especiali__Terce__7C3A67EB">
+      <End Role="Tercero" EntitySet="Tercero" />
+      <End Role="EspecialidadConductor" EntitySet="EspecialidadConductor" />
     </AssociationSet>
     <AssociationSet Name="FK__Observaci__Terce__190BB0C3" Association="TranslanzaModel.FK__Observaci__Terce__190BB0C3">
       <End Role="Tercero" EntitySet="Tercero" />
@@ -125,7 +129,7 @@
     <Property Name="UsuarioActualizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="FechaActualizacion" Type="DateTime" Precision="0" />
     <NavigationProperty Name="Agrupacion" Relationship="TranslanzaModel.FK_Tipo_Agrupacion" FromRole="Tipo" ToRole="Agrupacion" />
-    <NavigationProperty Name="EspecialidadConductor" Relationship="TranslanzaModel.FK__Especiali__TipoI__3F3159AB" FromRole="Tipo" ToRole="EspecialidadConductor" />
+    <NavigationProperty Name="EspecialidadConductor" Relationship="TranslanzaModel.FK__Especiali__TipoI__1F83A428" FromRole="Tipo" ToRole="EspecialidadConductor" />
     <NavigationProperty Name="Tercero" Relationship="TranslanzaModel.FK__Tercero__Tipo__5FD33367" FromRole="Tipo" ToRole="Tercero" />
     <NavigationProperty Name="Vehiculo" Relationship="TranslanzaModel.FK__Vehiculo__Combus__1CDC41A7" FromRole="Tipo" ToRole="Vehiculo" />
     <NavigationProperty Name="Vehiculo1" Relationship="TranslanzaModel.FK__Vehiculo__Combus__1DD065E0" FromRole="Tipo" ToRole="Vehiculo" />
@@ -154,13 +158,12 @@
       <PropertyRef Name="RowID" />
     </Key>
     <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TipoID" Type="Int32" Nullable="false" />
-    <Property Name="Activo" Type="Boolean" />
+    <Property Name="TerceroID" Type="Int32" />
+    <Property Name="TipoID" Type="Int32" />
     <Property Name="UsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="FechaCreacion" Type="DateTime" Precision="0" />
-    <Property Name="UsuarioActualizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="FechaActualizacion" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="Tipo" Relationship="TranslanzaModel.FK__Especiali__TipoI__3F3159AB" FromRole="EspecialidadConductor" ToRole="Tipo" />
+    <NavigationProperty Name="Tipo" Relationship="TranslanzaModel.FK__Especiali__TipoI__1F83A428" FromRole="EspecialidadConductor" ToRole="Tipo" />
+    <NavigationProperty Name="Tercero" Relationship="TranslanzaModel.FK__Especiali__Terce__7C3A67EB" FromRole="EspecialidadConductor" ToRole="Tercero" />
   </EntityType>
   <EntityType Name="ObservacionConductor">
     <Key>
@@ -201,15 +204,16 @@
     <Property Name="Img_DocIdentidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Img_LicenciaConduccion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="Calificacion" Type="Int32" />
-    <Property Name="Tipo" Type="Int32" Nullable="false" />
+    <Property Name="TipoID" Type="Int32" />
     <Property Name="Activo" Type="Boolean" />
     <Property Name="UsuarioCreacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="FechaCreacion" Type="DateTime" Precision="0" />
     <Property Name="UsuarioActualizacion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="FechaActualizacion" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="Tipo1" Relationship="TranslanzaModel.FK__Tercero__Tipo__5FD33367" FromRole="Tercero" ToRole="Tipo" />
+    <NavigationProperty Name="Tipo" Relationship="TranslanzaModel.FK__Tercero__Tipo__5FD33367" FromRole="Tercero" ToRole="Tipo" />
     <NavigationProperty Name="AfiliadoConductor" Relationship="TranslanzaModel.FK__AfiliadoC__Afili__2A363CC5" FromRole="Tercero" ToRole="AfiliadoConductor" />
     <NavigationProperty Name="AfiliadoConductor1" Relationship="TranslanzaModel.FK__AfiliadoC__Condu__2B2A60FE" FromRole="Tercero" ToRole="AfiliadoConductor" />
+    <NavigationProperty Name="EspecialidadConductor" Relationship="TranslanzaModel.FK__Especiali__Terce__7C3A67EB" FromRole="Tercero" ToRole="EspecialidadConductor" />
     <NavigationProperty Name="ObservacionConductor" Relationship="TranslanzaModel.FK__Observaci__Terce__190BB0C3" FromRole="Tercero" ToRole="ObservacionConductor" />
     <NavigationProperty Name="Usuario" Relationship="TranslanzaModel.FK__Usuario__Tercero__05F8DC4F" FromRole="Tercero" ToRole="Usuario" />
     <NavigationProperty Name="Vehiculo" Relationship="TranslanzaModel.FK__Vehiculo__Tercer__1BE81D6E" FromRole="Tercero" ToRole="Vehiculo" />
@@ -332,8 +336,8 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Especiali__TipoI__3F3159AB">
-    <End Type="TranslanzaModel.Tipo" Role="Tipo" Multiplicity="1" />
+  <Association Name="FK__Especiali__TipoI__1F83A428">
+    <End Type="TranslanzaModel.Tipo" Role="Tipo" Multiplicity="0..1" />
     <End Type="TranslanzaModel.EspecialidadConductor" Role="EspecialidadConductor" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Tipo">
@@ -345,14 +349,14 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK__Tercero__Tipo__5FD33367">
-    <End Type="TranslanzaModel.Tipo" Role="Tipo" Multiplicity="1" />
+    <End Type="TranslanzaModel.Tipo" Role="Tipo" Multiplicity="0..1" />
     <End Type="TranslanzaModel.Tercero" Role="Tercero" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Tipo">
         <PropertyRef Name="RowID" />
       </Principal>
       <Dependent Role="Tercero">
-        <PropertyRef Name="Tipo" />
+        <PropertyRef Name="TipoID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -449,6 +453,18 @@
       </Principal>
       <Dependent Role="AfiliadoConductor">
         <PropertyRef Name="ConductorID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Especiali__Terce__7C3A67EB">
+    <End Type="TranslanzaModel.Tercero" Role="Tercero" Multiplicity="0..1" />
+    <End Type="TranslanzaModel.EspecialidadConductor" Role="EspecialidadConductor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tercero">
+        <PropertyRef Name="RowID" />
+      </Principal>
+      <Dependent Role="EspecialidadConductor">
+        <PropertyRef Name="TerceroID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

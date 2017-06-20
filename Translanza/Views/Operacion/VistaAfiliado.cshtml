@@ -1,80 +1,79 @@
 ﻿@{
     Layout = "~/Views/Inicio/Diseño_Administrativo.cshtml";
 }
+@using Translanza.Models;
 
+    <div class="col-xs-12">
 
-<div class="col-xs-12">
+        <a href="@Url.Action("Afiliado", "Operacion")"><i class="glyphicon glyphicon-plus">Nuevo</i></a>
 
-    <a href="@Url.Action("Afiliado", "Operacion")"><i class="glyphicon glyphicon-plus">Nuevo</i></a>
+        <br /><br />
 
-    <br /><br />
+        <div class="panel panel-success">
+            <div class="panel-heading">Afiliado</div>
+            <div class="panel-body">
+                <table id="example1" class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Identificación</th>
+                            <th>Nombre Completo </th>
+                            <th>Telefono / Celular</th>
+                            <th>Correo</th>
+                            <th>Estado </th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-    <div class="panel panel-success">
-        <div class="panel-heading">Afiliado</div>
-        <div class="panel-body">
-            <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                    <tr>
-                        <th>Identificación</th>
-                        <th>Nombre Completo </th>
-                        <th>Telefono / Celular</th>
-                        <th>Correo</th>
-                        <th>Estado </th>
-                        <th>Acción</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    @foreach (Translanza.Models.Afiliado item in ViewBag.Lista)
-                            {
+                        @foreach (Tercero item in ViewBag.Lista)
+                        {
                             <tr>
                                 <td>@item.Identificacion</td>
                                 <td>@item.Nombre @item.Apellido</td>
                                 <td>@item.Telefono / @item.Celular</td>
                                 <td>@item.Correo</td>
                                 @if (item.Activo == true)
-                                    {
+                                {
                                     <td>Activo</td>
-                                    }
-                                    else
-                                    {
+                                }
+                                else
+                                {
                                     <td>Inactivo</td>
-                                    }
+                                }
                                 <td class=" last">
                                     <a href="@Url.Action("Afiliado", "Operacion", new { @rowid =item.RowID})">Ver</a>
                                 </td>
                             </tr>
-                            }
-                </tbody>
-            </table>
+                        }
+                    </tbody>
+                </table>
+            </div>
         </div>
+
     </div>
 
-</div>
-
-<script>
-    $(function () {
-        $('#example1').DataTable({
-            "paging": true,
-            "lengthChange": true,
-            "searching": true,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "language": {
-                "lengthMenu": "Mostar _MENU_ registros por página",
-                "zeroRecords": "Sin registros",
-                "info": "Página _PAGE_ de _PAGES_",
-                "infoEmpty": "",
-                "infoFiltered": "(Filtrado de _MAX_ registros totales)",
-                "sSearch": "Buscar:",
-                "scrollX": true,
-                "paginate": {
-                    "previous": "Anterior",
-                    "next": "Siguiente",
+    <script>
+        $(function () {
+            $('#example1').DataTable({
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "language": {
+                    "lengthMenu": "Mostar _MENU_ registros por página",
+                    "zeroRecords": "Sin registros",
+                    "info": "Página _PAGE_ de _PAGES_",
+                    "infoEmpty": "",
+                    "infoFiltered": "(Filtrado de _MAX_ registros totales)",
+                    "sSearch": "Buscar:",
+                    "scrollX": true,
+                    "paginate": {
+                        "previous": "Anterior",
+                        "next": "Siguiente",
+                    }
                 }
-            }
+            });
         });
-    });
-</script>
-
+    </script>

@@ -50,12 +50,10 @@
     <EntitySetMapping Name="EspecialidadConductor">
       <EntityTypeMapping TypeName="TranslanzaModel.EspecialidadConductor">
         <MappingFragment StoreEntitySet="EspecialidadConductor">
-          <ScalarProperty Name="FechaActualizacion" ColumnName="FechaActualizacion" />
-          <ScalarProperty Name="UsuarioActualizacion" ColumnName="UsuarioActualizacion" />
           <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
           <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
-          <ScalarProperty Name="Activo" ColumnName="Activo" />
           <ScalarProperty Name="TipoID" ColumnName="TipoID" />
+          <ScalarProperty Name="TerceroID" ColumnName="TerceroID" />
           <ScalarProperty Name="RowID" ColumnName="RowID" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -92,7 +90,7 @@
           <ScalarProperty Name="FechaCreacion" ColumnName="FechaCreacion" />
           <ScalarProperty Name="UsuarioCreacion" ColumnName="UsuarioCreacion" />
           <ScalarProperty Name="Activo" ColumnName="Activo" />
-          <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+          <ScalarProperty Name="TipoID" ColumnName="TipoID" />
           <ScalarProperty Name="Calificacion" ColumnName="Calificacion" />
           <ScalarProperty Name="Img_LicenciaConduccion" ColumnName="Img_LicenciaConduccion" />
           <ScalarProperty Name="Img_DocIdentidad" ColumnName="Img_DocIdentidad" />

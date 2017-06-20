@@ -39,22 +39,6 @@
                         </div>
                     </div>
 
-                    @*<div class="row form-group">
-                        <div class="col-md-2">
-                            <label>Tipo:</label>
-                        </div>
-                        <div class="col-md-4">
-                            <select name="tipo" style="width:100%" id="tipo" class="select2" required>
-                                <option value="" disabled selected>Seleccione una opcion</option>
-                                <option value="empleado">Empleado</option>
-                                <option value="afiliado">Afiliado</option>
-                            </select>
-                        </div>
-                    </div>*@
-
-
-                    @*@if (Model.EmpleadoID > 0)
-                        {*@
                     <div class="row form-group" id="listaTercero">
                         <div class="col-md-2">
                             <label>Tercero:</label>
@@ -78,34 +62,6 @@
                             </select>
                         </div>
                     </div>
-
-                    @*}
-                        else
-                        {*@
-                    @*<div class="row form-group" id="listaAfiliado" hidden>
-                        <div class="col-md-2">
-                            <label>Afiliado:</label>
-                        </div>
-                        <div class="col-md-4">
-                            <select name="afiliado" style="width:100%" class="select2" required>
-
-                                <option value="" disabled selected>Seleccione una opcion</option>
-
-                                @foreach (Afiliado item in ViewBag.listaAfiliado)
-                                {
-                                    if (Model.RowID > 0 && item.RowID == Model.EmpleadoID)
-                                    {
-                                        <option value="@item.RowID" selected>@item.Identificacion - @item.Nombre @item.Apellido</option>
-                                    }
-                                    else
-                                    {
-                                        <option value="@item.RowID">@item.Identificacion - @item.Nombre @item.Apellido</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-                    </div>*@
-                    @*}*@
 
                     <div class="row form-group">
                         <div class="col-md-2">

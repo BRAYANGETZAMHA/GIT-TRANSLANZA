@@ -81,16 +81,19 @@
             })
         })
         function Logeo() {
+            //$("#tabla").empty().html('<img style="display:block;margin-top:20px;margin:auto;" src="../Content/img/ui-anim_basic_16x16.gif" />');
+            $("#mensaje").empty().append("<img src='Content/img/loading.gif'></img>");
             $.ajax({
                 url: "Inicio/InicioSesion",
                 type: "post",
                 data: { usuario: $("#Usuario").val(), contraseña: $("#Contraseña").val() },
                 success: function (data) {
                     if (data.resultado == true) {
+
                         window.location.href = data.ruta;
                     }
                     else {
-                        $("#mensaje").append("<label>Usuario o contraseña incorrecto.</label>");
+                        $("#mensaje").empty().append("<label>Usuario o contraseña incorrecto.</label>");
                     }
                 },
                 error: function (error) {
@@ -163,7 +166,7 @@
                                                         <input type="password" class="form-control" id="Contraseña" placeholder="Contraseña" required>
                                                         @*@Html.PasswordFor(a => a.Contraseña, new { placeholder = "Contraseña", Class = "form-control" })*@
                                                     </div>
-                                                    <div id="mensaje" class="form-group">
+                                                    <div id="mensaje" align="center" class="form-group">
 
                                                     </div>
                                                     <div class="form-group">
@@ -700,7 +703,7 @@
                 $("#nombre").val("");
                 $("#correo").val("");
                 $("#asunto").val("");
-                $("#mensaje").empty();  
+                $("#mensaje").empty();
 
             },
             error: function (error) {
@@ -782,7 +785,7 @@
             confirmButtonClass: 'btn btn-success',
             cancelButtonClass: '',
             buttonsStyling: false
-        }).then(function () {})
+        }).then(function () { })
     }
 
     $.validator.messages.required = 'Campo requerido';

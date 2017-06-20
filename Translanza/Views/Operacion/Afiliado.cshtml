@@ -1,4 +1,4 @@
-﻿@model Translanza.Models.Afiliado
+﻿@model Translanza.Models.Tercero
 @{
     ViewBag.Title = "Terceros";
     Layout = "~/Views/Inicio/Diseño_Administrativo.cshtml";
@@ -121,6 +121,11 @@
             $('#lblinactivo').addClass("btn-primary");
             //$('#lblactivo').removeClass("btn-primary");
         }
+    }
+    else {
+        //Deja por defecto activo
+        $('#activo').attr('checked', true);
+        $('#lblactivo').addClass("btn-primary");
     }
 
     $(document).ready(function () {
